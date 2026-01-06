@@ -1,5 +1,10 @@
-name = "colabs-website"
+name = "www2-vtech-co-th"
 compatibility_date = "2026-01-06"
 
 [assets]
 directory = "./dist"
+
+# Environment Variables (Set these in the Cloudflare Pages Dashboard)
+# [vars]
+# FIREBASE_PROJECT_ID = "your-project-id"
+# GITHUB_TOKEN = "your-github-token"

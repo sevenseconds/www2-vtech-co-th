@@ -49,10 +49,11 @@ To use Decap CMS locally:
 
 ## 📝 Content Management
 
-### Access the CMS
+### Accessing the CMS
 
-Once deployed, visit `https://your-site.pages.dev/admin` to access the content management system.
-
+1. **Navigate to the admin panel**: Visit `https://your-site-url/admin`
+2. **Authenticate**: Click "Login with GitHub". A popup will appear on your own domain to handle the authentication.
+3. **Start managing content!**
 ### Content Types
 
 - **Blog Posts** - Articles and news
@@ -86,18 +87,20 @@ Once deployed, visit `https://your-site.pages.dev/admin` to access the content m
    - `CLOUDFLARE_API_TOKEN` - Get from Cloudflare Dashboard → My Profile → API Tokens
    - `CLOUDFLARE_ACCOUNT_ID` - Find in Cloudflare Dashboard URL
 
-3. **Enable Decap CMS Authentication**
-   
-   Set up GitHub OAuth application:
-   - Go to GitHub Settings → Developer settings → OAuth Apps → New OAuth App
-   - Homepage URL: `https://your-site.pages.dev`
-   - Authorization callback URL: `https://api.netlify.com/auth/done`
-   - Copy Client ID and Client Secret
-   
-   Configure in Cloudflare Pages:
-   - Add environment variables in Pages settings:
-     - `GITHUB_CLIENT_ID`
-     - `GITHUB_CLIENT_SECRET`
+3. **### Enable Custom Cloudflare OAuth Authentication
+
+1. **Create GitHub OAuth Application**
+   - Go to **GitHub Settings** -> **Developer Settings** -> **OAuth Apps** -> **New OAuth App**.
+   - **Application Name**: `CoLabs CMS`
+   - **Homepage URL**: `https://www2-vtech-co-th.pages.dev`
+   - **Authorization callback URL**: `https://www2-vtech-co-th.pages.dev/callback`
+   - Copy the **Client ID** and **Client Secret**.
+
+2. **Configure Cloudflare Pages Environment Variables**
+   - In Cloudflare Dashboard, go to your Pages project -> **Settings** -> **Environment variables**.
+   - Add the following variables for both **Production** and **Preview**:
+     - `GITHUB_CLIENT_ID`: (Your Client ID)
+     - `GITHUB_CLIENT_SECRET`: (Your Client Secret)
 
 ### Automatic Deployments
 
