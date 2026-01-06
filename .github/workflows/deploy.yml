@@ -38,7 +38,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: colabs-website # Change this to your Cloudflare Pages project name
+          projectName: www2-vtech-co-th # Change this to your Cloudflare Pages project name
           directory: dist
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           branch: main
