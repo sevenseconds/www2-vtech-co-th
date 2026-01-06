@@ -1,8 +1,9 @@
 backend:
-  name: git-gateway
-  branch: main # Branch to update (optional; defaults to master)
+  name: github
+  repo: sevenseconds/www2-vtech-co-th
+  branch: main
 
-# Uncomment for local testing
+# Uncomment for local testing with npx decap-server
 # local_backend: true
 
 media_folder: "public/images" # Media files will be stored here
