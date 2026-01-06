@@ -81,11 +81,14 @@
         const idToken = await user.getIdToken();
 
         // Set user in localStorage so Decap CMS picks it up
-        localStorage.setItem('decap-cms-user', JSON.stringify({
+        const userObj = JSON.stringify({
           token: idToken,
           email: user.email,
           backendName: 'git-gateway'
-        }));
+        });
+
+        localStorage.setItem('decap-cms-user', userObj);
+        localStorage.setItem('netlify-cms-user', userObj);
 
         // Load Decap CMS script dynamically
         if (!cmsLoaded) {
