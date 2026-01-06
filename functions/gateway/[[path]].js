@@ -1,4 +1,4 @@
-import { verifyFirebaseToken } from './_verify.js';
+import { verifyFirebaseToken } from '../api/_verify.js';
 
 /**
  * Lightweight Git Gateway Proxy for Decap CMS
