@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { getCollection } from 'astro:content';
+
+const products = await getCollection('products');
+const featuredProducts = products.filter(p => p.data.featured);
+const regularProducts = products.filter(p => !p.data.featured);
+---
+
+<BaseLayout title="Our Products - CoLabs" description="Professional laboratory equipment and products for accurate diagnostics and research.">
+  <Header />
+  
+  <Hero 
+    title="Laboratory Products"
+    subtitle="Professional-grade laboratory equipment and supplies for accurate diagnostics and cutting-edge research"
+  />
+  
+  {featuredProducts.length > 0 && (
+    <section class="section-padding bg-slate-50">
+      <div class="container-custom">
+        <h2 class="text-3xl font-bold mb-8 text-blue-900">Featured Products</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {featuredProducts.map(product => (
+            <ProductCard 
+              name={product.data.name}
+              price={product.data.price}
+              description={product.data.description}
+              image={product.data.images[0]}
+              sku={product.data.sku}
+              category={product.data.category}
+              featured={product.data.featured}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+  
+  <section class="section-padding bg-white">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold mb-8 text-blue-900">All Products</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        {regularProducts.map(product => (
+          <ProductCard 
+            name={product.data.name}
+            price={product.data.price}
+            description={product.data.description}
+            image={product.data.images[0]}
+            sku={product.data.sku}
+            category={product.data.category}
+            featured={product.data.featured}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+  
+  <Footer />
+</BaseLayout>

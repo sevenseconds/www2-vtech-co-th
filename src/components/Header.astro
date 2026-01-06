@@ -1,0 +1,70 @@
+---
+// Header component with navigation
+---
+
+<header class="bg-white shadow-md sticky top-0 z-50">
+  <nav class="container-custom py-4">
+    <div class="flex items-center justify-between">
+      <!-- Logo -->
+      <a href="/" class="flex items-center space-x-3">
+        <div class="w-10 h-10 bg-gradient-to-br from-blue-900 to-blue-600 rounded-lg flex items-center justify-center">
+          <span class="text-white font-bold text-xl">C</span>
+        </div>
+        <span class="text-2xl font-bold text-blue-900">CoLabs</span>
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center space-x-8">
+        <a href="/" class="text-slate-700 hover:text-blue-900 font-medium transition-colors">Home</a>
+        <a href="/about" class="text-slate-700 hover:text-blue-900 font-medium transition-colors">About Us</a>
+        
+        <!-- Services Dropdown -->
+        <div class="relative group">
+          <button class="text-slate-700 hover:text-blue-900 font-medium transition-colors flex items-center">
+            Services
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+            <a href="/services" class="block px-4 py-3 hover:bg-slate-50 text-slate-700 hover:text-blue-900">All Services</a>
+            <a href="/products" class="block px-4 py-3 hover:bg-slate-50 text-slate-700 hover:text-blue-900">Products</a>
+          </div>
+        </div>
+        
+        <a href="/projects" class="text-slate-700 hover:text-blue-900 font-medium transition-colors">Projects</a>
+        <a href="/blog" class="text-slate-700 hover:text-blue-900 font-medium transition-colors">Blog</a>
+        <a href="/contact" class="btn btn-primary text-sm">Contact Us</a>
+      </div>
+      
+      <!-- Mobile Menu Button -->
+      <button id="mobile-menu-btn" class="md:hidden text-slate-700">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4">
+      <div class="flex flex-col space-y-3">
+        <a href="/" class="text-slate-700 hover:text-blue-900 font-medium transition-colors">Home</a>
+        <a href="/about" class="text-slate-700 hover:text-blue-900 font-medium transition-colors">About Us</a>
+        <a href="/services" class="text-slate-700 hover:text-blue-900 font-medium transition-colors">Services</a>
+        <a href="/products" class="text-slate-700 hover:text-blue-900 font-medium transition-colors">Products</a>
+        <a href="/projects" class="text-slate-700 hover:text-blue-900 font-medium transition-colors">Projects</a>
+        <a href="/blog" class="text-slate-700 hover:text-blue-900 font-medium transition-colors">Blog</a>
+        <a href="/contact" class="btn btn-primary text-sm w-full">Contact Us</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<script>
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  
+  mobileMenuBtn?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+  });
+</script>

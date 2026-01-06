@@ -1,0 +1,130 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import TeamMember from '../components/TeamMember.astro';
+import { getCollection } from 'astro:content';
+
+const teamMembers = (await getCollection('team')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout title="About Us - CoLabs" description="Learn about our professional laboratory services, experienced team, and commitment to excellence.">
+  <Header />
+  
+  <Hero 
+    title="About CoLabs"
+    subtitle="Leading the way in laboratory excellence with cutting-edge technology and expert professionals"
+  />
+  
+  <!-- Mission Section -->
+  <section class="section-padding bg-white">
+    <div class="container-custom">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-4xl font-bold mb-6 text-gradient">Our Mission</h2>
+          <p class="text-lg text-slate-600 mb-4">
+            At CoLabs, we are dedicated to providing the highest quality laboratory services through 
+            advanced technology, rigorous quality control, and expert analysis. Our mission is to deliver 
+            accurate, timely results that empower healthcare providers and support better patient outcomes.
+          </p>
+          <p class="text-lg text-slate-600">
+            With over 15 years of experience, we have built a reputation for excellence in diagnostic testing, 
+            research support, and clinical laboratory services. Our state-of-the-art facilities and 
+            commitment to innovation make us a trusted partner for healthcare organizations worldwide.
+          </p>
+        </div>
+        <div class="bg-gradient-to-br from-blue-100 to-blue-50 rounded-2xl p-8">
+          <div class="space-y-6">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold mb-2 text-blue-900">Quality Assurance</h3>
+                <p class="text-slate-600">Rigorous quality control procedures ensuring accuracy and reliability</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold mb-2 text-blue-900">Advanced Technology</h3>
+                <p class="text-slate-600">State-of-the-art equipment and cutting-edge diagnostic methods</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="text-xl font-bold mb-2 text-blue-900">Expert Team</h3>
+                <p class="text-slate-600">Highly qualified professionals with decades of combined experience</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Stats Section -->
+  <section class="section-padding bg-gradient-to-r from-blue-900 to-blue-700 text-white">
+    <div class="container-custom">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+        <div class="text-center">
+          <div class="text-5xl font-bold mb-2">25,000+</div>
+          <div class="text-xl text-blue-200">Tests Completed</div>
+        </div>
+        <div class="text-center">
+          <div class="text-5xl font-bold mb-2">98.5%</div>
+          <div class="text-xl text-blue-200">Accuracy Rate</div>
+        </div>
+        <div class="text-center">
+          <div class="text-5xl font-bold mb-2">15+</div>
+          <div class="text-xl text-blue-200">Years Experience</div>
+        </div>
+        <div class="text-center">
+          <div class="text-5xl font-bold mb-2">500+</div>
+          <div class="text-xl text-blue-200">Healthcare Partners</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Team Section -->
+  <section class="section-padding bg-slate-50">
+    <div class="container-custom">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-5xl font-bold mb-4 text-gradient">Meet Our Team</h2>
+        <p class="text-xl text-slate-600 max-w-2xl mx-auto">
+          Our experienced professionals are dedicated to delivering exceptional laboratory services
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        {teamMembers.map(member => (
+          <TeamMember 
+            name={member.data.name}
+            role={member.data.role}
+            photo={member.data.photo}
+            bio={member.data.bio}
+            linkedin={member.data.linkedin}
+            twitter={member.data.twitter}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+  
+  <Footer />
+</BaseLayout>

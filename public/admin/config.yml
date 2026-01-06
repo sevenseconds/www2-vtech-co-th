@@ -1,0 +1,87 @@
+backend:
+  name: git-gateway
+  branch: main # Branch to update (optional; defaults to master)
+
+# Uncomment for local testing
+# local_backend: true
+
+media_folder: "public/images" # Media files will be stored here
+public_folder: "/images" # The src attribute for uploaded media
+
+collections:
+  # Blog Posts Collection
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Publish Date", name: "pubDate", widget: "datetime" }
+      - { label: "Author", name: "author", widget: "string", default: "Admin" }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
+      - { label: "Tags", name: "tags", widget: "list", default: [] }
+      - { label: "Draft", name: "draft", widget: "boolean", default: false }
+      - { label: "Body", name: "body", widget: "markdown" }
+
+  # Services Collection
+  - name: "services"
+    label: "Services"
+    folder: "src/content/services"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Icon (Emoji)", name: "icon", widget: "string", hint: "Use an emoji, like 🔬" }
+      - { label: "Display Order", name: "order", widget: "number", default: 0 }
+      - { label: "Content", name: "body", widget: "markdown" }
+
+  # Products Collection
+  - name: "products"
+    label: "Products"
+    folder: "src/content/products"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Product Name", name: "name", widget: "string" }
+      - { label: "SKU", name: "sku", widget: "string" }
+      - { label: "Price", name: "price", widget: "number" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Category", name: "category", widget: "string" }
+      - { label: "Images", name: "images", widget: "list", field: { label: "Image", name: "image", widget: "image" } }
+      - { label: "Featured Product", name: "featured", widget: "boolean", default: false }
+      - { label: "In Stock", name: "inStock", widget: "boolean", default: true }
+      - { label: "Details", name: "body", widget: "markdown" }
+
+  # Team Members Collection
+  - name: "team"
+    label: "Team Members"
+    folder: "src/content/team"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Role/Position", name: "role", widget: "string" }
+      - { label: "Photo", name: "photo", widget: "image" }
+      - { label: "Bio", name: "bio", widget: "text" }
+      - { label: "LinkedIn URL", name: "linkedin", widget: "string", required: false }
+      - { label: "Twitter URL", name: "twitter", widget: "string", required: false }
+      - { label: "Display Order", name: "order", widget: "number", default: 0 }
+      - { label: "Full Biography", name: "body", widget: "markdown" }
+
+  # Projects Collection
+  - name: "projects"
+    label: "Projects"
+    folder: "src/content/projects"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Category", name: "category", widget: "string" }
+      - { label: "Images", name: "images", widget: "list", field: { label: "Image", name: "image", widget: "image" } }
+      - { label: "Date Completed", name: "date", widget: "datetime" }
+      - { label: "Featured Project", name: "featured", widget: "boolean", default: false }
+      - { label: "Project Details", name: "body", widget: "markdown" }
