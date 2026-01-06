@@ -87,20 +87,25 @@ To use Decap CMS locally:
    - `CLOUDFLARE_API_TOKEN` - Get from Cloudflare Dashboard → My Profile → API Tokens
    - `CLOUDFLARE_ACCOUNT_ID` - Find in Cloudflare Dashboard URL
 
-3. **### Enable Custom Cloudflare OAuth Authentication
+3. **Enable Firebase Authentication & Custom Gateway**
 
-1. **Create GitHub OAuth Application**
-   - Go to **GitHub Settings** -> **Developer Settings** -> **OAuth Apps** -> **New OAuth App**.
-   - **Application Name**: `CoLabs CMS`
-   - **Homepage URL**: `https://www2-vtech-co-th.pages.dev`
-   - **Authorization callback URL**: `https://www2-vtech-co-th.pages.dev/callback`
-   - Copy the **Client ID** and **Client Secret**.
+1. **Firebase Setup**:
+   - Create a project at [Firebase Console](https://console.firebase.google.com/).
+   - Enable **Authentication** (Email/Password).
+   - Create a **Web App** and copy your `firebaseConfig`.
+   - Paste the config into `public/admin/index.html`.
 
-2. **Configure Cloudflare Pages Environment Variables**
-   - In Cloudflare Dashboard, go to your Pages project -> **Settings** -> **Environment variables**.
-   - Add the following variables for both **Production** and **Preview**:
-     - `GITHUB_CLIENT_ID`: (Your Client ID)
-     - `GITHUB_CLIENT_SECRET`: (Your Client Secret)
+2. **GitHub Personal Access Token (PAT)**:
+   - Generate a **Personal Access Token (classic)** at GitHub Settings → Developer Settings → Tokens.
+   - Select the `repo` scope.
+   - Copy this token—you will need it for Cloudflare.
+
+3. **Configure Cloudflare Pages**:
+   - In the Cloudflare Dashboard, go to **Workers & Pages** -> **Create** -> **Pages** -> **Connect to Git**.
+   - **IMPORTANT**: Look for the **"Looking to deploy Pages? Get started"** link at the bottom of the Workers page.
+   - Add these **Environment Variables** in the Pages project settings:
+     - `FIREBASE_PROJECT_ID`: Your Firebase project ID.
+     - `GITHUB_TOKEN`: The GitHub PAT you just generated.
 
 ### Automatic Deployments
 
@@ -179,7 +184,8 @@ Update `public/admin/config.yml` to match your content collection changes.
 - ✅ No database - eliminates SQL injection risks
 - ✅ No PHP runtime - no server-side vulnerabilities
 - ✅ Static files only - minimal attack surface
-- ✅ GitHub OAuth authentication for CMS
+- ✅ Firebase Authentication for CMS login (No GitHub accounts needed for editors)
+- ✅ Custom Cloudflare Gateway with `jose` token verification
 - ✅ Cloudflare security (DDoS protection, WAF)
 
 ## 📦 Build Commands
@@ -203,8 +209,8 @@ npm run astro check
 ### CMS Not Loading
 
 Check that:
-1. GitHub OAuth is configured correctly
-2. Environment variables are set in Cloudflare Pages
+1. Firebase configuration in `index.html` is correct
+2. `FIREBASE_PROJECT_ID` and `GITHUB_TOKEN` are set in Cloudflare Pages
 3. You're accessing via HTTPS (not HTTP)
 
 ### Build Failures
