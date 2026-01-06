@@ -82,11 +82,15 @@
 
         // Set user in localStorage so Decap CMS picks it up
         const userObj = JSON.stringify({
-          token: idToken,
+          token: {
+            access_token: idToken,
+            token_type: 'bearer'
+          },
           email: user.email,
           backendName: 'git-gateway'
         });
 
+        console.log('Firebase login successful, setting CMS session...');
         localStorage.setItem('decap-cms-user', userObj);
         localStorage.setItem('netlify-cms-user', userObj);
 

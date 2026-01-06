@@ -2,7 +2,7 @@ backend:
   name: git-gateway
   repo: sevenseconds/www2-vtech-co-th
   branch: main
-  gateway_url: https://www2-vtech-co-th.pages.dev/gateway
+  gateway_url: /gateway
 
 # Uncomment for local testing with npx decap-server
 # local_backend: true
