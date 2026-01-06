@@ -14,7 +14,6 @@
   <div id="login-container"
     style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; font-family: sans-serif;">
     <h1 style="color: #1e3a8a;">CoLabs Admin</h1>
-    <div id="firebaseui-auth-container"></div>
     <form id="login-form" style="display: flex; flex-direction: column; gap: 10px; width: 300px;">
       <input type="email" id="email" placeholder="Email" required
         style="padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
@@ -24,10 +23,12 @@
         style="padding: 12px; background: #1e3a8a; color: white; border: none; border-radius: 4px; cursor: pointer;">Login</button>
     </form>
     <p id="error-message" style="color: red; margin-top: 10px;"></p>
-    <button id="logout" style="display: none; margin-top: 20px;">Logout</button>
   </div>
 
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  <div id="logout-bar" style="display: none; position: fixed; top: 10px; right: 10px; z-index: 9999;">
+    <button id="logout-btn"
+      style="padding: 8px 16px; background: #ef4444; color: white; border: none; border-radius: 4px; cursor: pointer; font-family: sans-serif;">Logout</button>
+  </div>
 
   <script>
     // --- FIREBASE CONFIGURATION ---
@@ -47,6 +48,8 @@
 
     const loginForm = document.getElementById('login-form');
     const errorMessage = document.getElementById('error-message');
+    const logoutBar = document.getElementById('logout-bar');
+    const logoutBtn = document.getElementById('logout-btn');
 
     loginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -60,28 +63,40 @@
       }
     });
 
+    logoutBtn.addEventListener('click', async () => {
+      await auth.signOut();
+      localStorage.removeItem('decap-cms-user');
+      window.location.reload();
+    });
+
     // --- DECAP CMS INTEGRATION ---
+    let cmsLoaded = false;
+
     auth.onAuthStateChanged(async (user) => {
       if (user) {
         document.getElementById('login-container').style.display = 'none';
+        logoutBar.style.display = 'block';
 
         // Get the ID Token to pass to Decap CMS
         const idToken = await user.getIdToken();
 
-        // Custom Authenticator for Decap CMS
-        // Since we are using git-gateway, CMS will look for a token in localStorage
-        // or provided by an authenticator.
+        // Set user in localStorage so Decap CMS picks it up
         localStorage.setItem('decap-cms-user', JSON.stringify({
           token: idToken,
           email: user.email,
           backendName: 'git-gateway'
         }));
 
-        // Refresh the page or trigger CMS to load
-        // CMS usually initializes on load, but since we are already here
-        // if user logged in, we let it proceed.
+        // Load Decap CMS script dynamically
+        if (!cmsLoaded) {
+          const script = document.createElement('script');
+          script.src = "https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js";
+          document.body.appendChild(script);
+          cmsLoaded = true;
+        }
       } else {
         document.getElementById('login-container').style.display = 'flex';
+        logoutBar.style.display = 'none';
       }
     });
   </script>
