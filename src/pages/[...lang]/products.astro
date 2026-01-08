@@ -1,17 +1,29 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import Hero from '../components/Hero.astro';
-import ProductCard from '../components/ProductCard.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Hero from '../../components/Hero.astro';
+import ProductCard from '../../components/ProductCard.astro';
 import { getCollection } from 'astro:content';
+import { useTranslations } from '../../i18n/utils';
 
+export function getStaticPaths() {
+  return [
+    { params: { lang: undefined } },
+    { params: { lang: 'en' } },
+  ];
+}
+
+const { lang: langParam } = Astro.params;
+const lang = langParam || 'th';
+const t = useTranslations(lang as 'en' | 'th');
 const products = await getCollection('products');
 const featuredProducts = products.filter(p => p.data.featured);
 const regularProducts = products.filter(p => !p.data.featured);
 ---
 
-<BaseLayout title="Our Products - V-TECH" description="Professional laboratory equipment and products for accurate diagnostics and research.">
+
+<BaseLayout title="Our Products - V-TECH" description="Professional laboratory equipment and products for accurate diagnostics and research." lang={lang}>
   <Header />
   
   <Hero 

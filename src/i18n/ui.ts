@@ -1,0 +1,53 @@
+export const languages = {
+    en: 'English',
+    th: 'ไทย',
+};
+
+export const defaultLang = 'th';
+
+export const ui = {
+    en: {
+        'nav.home': 'Home',
+        'nav.about': 'About',
+        'nav.research': 'Research',
+        'nav.services': 'Services',
+        'nav.blog': 'Blog',
+        'nav.contacts': 'Contacts',
+        'nav.call_us': 'Call Us',
+        'contact.info': 'Contact Info',
+        'contact.telephone': 'Telephone',
+        'contact.email': 'Email Address',
+        'contact.office': 'Office Address',
+        'contact.address_value': 'Bangkok, Thailand',
+        'contact.full_address': '91 Soi Sukhumvit 95/1 Sukhumvit Road, Bangchak, Phrakhanong, Bangkok 10260, Thailand',
+        'contact.company_name': 'VTECH INNOVATION CO., LTD.',
+        'contact.phone_value': '02-742-5340',
+        'contact.full_phone': '02-742-5340, 092 537 8424',
+        'contact.email_value': 'sales@vtech.co.th',
+        'footer.company_desc': 'Leading the way in laboratory excellence. We provide comprehensive diagnostic services powered by advanced technology and expert analysis.',
+        'site.title': 'V-TECH - Laboratory Center',
+        'site.description': 'Professional laboratory services and testing solutions with cutting-edge technology',
+    },
+    th: {
+        'nav.home': 'หน้าแรก',
+        'nav.about': 'เกี่ยวกับเรา',
+        'nav.research': 'งานวิจัย',
+        'nav.services': 'บริการ',
+        'nav.blog': 'บล็อก',
+        'nav.contacts': 'ติดต่อเรา',
+        'nav.call_us': 'โทรหาเรา',
+        'contact.info': 'ข้อมูลการติดต่อ',
+        'contact.telephone': 'โทรศัพท์',
+        'contact.email': 'อีเมล',
+        'contact.office': 'ที่อยู่สำนักงาน',
+        'contact.address_value': 'กรุงเทพมหานคร',
+        'contact.full_address': '91 ซอยสุขุมวิท 95/1 ถนนสุขุมวิท แขวงบางจาก เขตพระโขนง กรุงเทพมหานคร 10260',
+        'contact.company_name': 'บริษัท วีเทค อินโนเวชั่น จำกัด (สำนักงานใหญ่)',
+        'contact.phone_value': '02-742-5340',
+        'contact.full_phone': '02-742-5340, 092 537 8424',
+        'contact.email_value': 'sales@vtech.co.th',
+        'footer.company_desc': 'ผู้นำด้านความเป็นเลิศในห้องปฏิบัติการ เราให้บริการการวินิจฉัยที่ครอบคลุม ขับเคลื่อนด้วยเทคโนโลยีขั้นสูงและการวิเคราะห์โดยผู้เชี่ยวชาญ',
+        'site.title': 'V-TECH - ศูนย์บริการตรวจวิเคราะห์ทางห้องปฏิบัติการ',
+        'site.description': 'บริการทางห้องปฏิบัติการระดับมืออาชีพและโซลูชันการทดสอบด้วยเทคโนโลยีที่ทันสมัย',
+    },
+} as const;

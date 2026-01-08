@@ -1,15 +1,27 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import Hero from '../components/Hero.astro';
-import TeamMember from '../components/TeamMember.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Hero from '../../components/Hero.astro';
+import TeamMember from '../../components/TeamMember.astro';
 import { getCollection } from 'astro:content';
+import { useTranslations } from '../../i18n/utils';
 
+export function getStaticPaths() {
+  return [
+    { params: { lang: undefined } },
+    { params: { lang: 'en' } },
+  ];
+}
+
+const { lang: langParam } = Astro.params;
+const lang = langParam || 'th';
+const t = useTranslations(lang as 'en' | 'th');
 const teamMembers = (await getCollection('team')).sort((a, b) => a.data.order - b.data.order);
 ---
 
-<BaseLayout title="About Us - V-TECH" description="Learn about our professional laboratory services, experienced team, and commitment to excellence.">
+
+<BaseLayout title={`${t('nav.about')} - V-TECH`} description={t('site.description')} lang={lang}>
   <Header />
   
   <Hero 

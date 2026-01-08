@@ -2,7 +2,7 @@
 title: "COVID-19 Testing Initiative"
 description: "Rapid deployment of high-throughput PCR testing facility to support pandemic response efforts."
 category: "Public Health"
-images: ["/images/projects/covid-testing.jpg"]
+images: ["/images/case-4.png"]
 date: 2025-10-20
 featured: true
 ---

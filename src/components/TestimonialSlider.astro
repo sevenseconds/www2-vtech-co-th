@@ -24,13 +24,13 @@ const testimonials = [
 <section class="section-padding bg-white overflow-hidden">
   <div class="container-custom">
     <div class="flex flex-col lg:flex-row items-center gap-16">
-      <div class="lg:w-1/3">
+      <div class="lg:w-1/3 text-center lg:text-left">
         <div class="text-[10px] font-bold text-primary uppercase tracking-[0.4em] mb-4">Testimonials</div>
-        <h2 class="text-4xl font-bold font-heading uppercase mb-8 leading-tight">What Our <span class="text-primary italic">Partners</span> Say About Us</h2>
-        <p class="text-slate-500 leading-relaxed mb-8">
+        <h2 class="text-3xl md:text-4xl font-bold font-heading uppercase mb-8 leading-tight">What Our <span class="text-primary italic">Partners</span> Say About Us</h2>
+        <p class="text-slate-500 text-sm md:text-base leading-relaxed mb-8">
           We pride ourselves on building long-lasting relationships with healthcare providers through reliability and excellence.
         </p>
-        <div class="flex gap-4">
+        <div class="hidden lg:flex gap-4">
           <button id="prev-testimonial" class="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center hover:bg-primary hover:border-primary hover:text-white transition-all duration-300">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
           </button>
@@ -40,33 +40,43 @@ const testimonials = [
         </div>
       </div>
       
-      <div class="lg:w-2/3 relative">
-        <div id="testimonial-container" class="relative overflow-hidden">
+      <div class="lg:w-2/3 relative w-full">
+        <div id="testimonial-container" class="relative overflow-hidden w-full">
           <div id="testimonial-track" class="flex transition-transform duration-500 ease-in-out">
             {testimonials.map((t) => (
-              <div class="min-w-full px-4">
-                <div class="bg-slate-50 p-10 md:p-16 rounded-3xl relative">
-                  <div class="absolute top-10 right-10 opacity-10">
-                    <svg class="w-20 h-20 text-primary" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H16.017C15.4647 8 15.017 8.44772 15.017 9V12C15.017 12.5523 14.5693 13 14.017 13H13.017V21H14.017ZM6.01703 21L6.01703 18C6.01703 16.8954 6.91242 16 8.01703 16H11.017C11.5693 16 12.017 15.5523 12.017 15V9C12.017 8.44772 11.5693 8 11.017 8H8.01703C7.46475 8 7.01703 8.44772 7.01703 9V12C7.01703 12.5523 6.56931 13 6.01703 13H5.01703V21H6.01703Z"/></svg>
+              <div class="min-w-full px-2 md:px-4">
+                <div class="bg-slate-50 p-8 md:p-16 rounded-3xl relative h-full">
+                  <div class="absolute top-6 right-6 md:top-10 md:right-10 opacity-10">
+                    <svg class="w-12 h-12 md:w-20 md:h-20 text-primary" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H16.017C15.4647 8 15.017 8.44772 15.017 9V12C15.017 12.5523 14.5693 13 14.017 13H13.017V21H14.017ZM6.01703 21L6.01703 18C6.01703 16.8954 6.91242 16 8.01703 16H11.017C11.5693 16 12.017 15.5523 12.017 15V9C12.017 8.44772 11.5693 8 11.017 8H8.01703C7.46475 8 7.01703 8.44772 7.01703 9V12C7.01703 12.5523 6.56931 13 6.01703 13H5.01703V21H6.01703Z"/></svg>
                   </div>
-                  <p class="text-xl md:text-2xl italic text-secondary leading-relaxed mb-10 relative z-10">
+                  <p class="text-lg md:text-2xl italic text-secondary leading-relaxed mb-8 md:mb-10 relative z-10">
                     "{t.text}"
                   </p>
-                  <div class="flex items-center gap-6">
-                    <div class="w-16 h-16 rounded-full bg-slate-200 overflow-hidden ring-4 ring-white shadow-lg">
+                  <div class="flex flex-col md:flex-row items-center md:items-center gap-4 md:gap-6 text-center md:text-left">
+                    <div class="w-14 h-14 md:w-16 md:h-16 rounded-full bg-slate-200 overflow-hidden ring-4 ring-white shadow-lg flex-shrink-0">
                       <div class="w-full h-full flex items-center justify-center text-primary font-bold bg-primary/10">
                         {t.author.charAt(0)}
                       </div>
                     </div>
                     <div>
-                      <div class="font-bold text-secondary font-heading uppercase tracking-wide">{t.author}</div>
-                      <div class="text-sm text-primary font-medium">{t.role}</div>
+                      <div class="font-bold text-secondary font-heading uppercase tracking-wide text-sm md:text-base">{t.author}</div>
+                      <div class="text-[11px] md:text-sm text-primary font-medium">{t.role}</div>
                     </div>
                   </div>
                 </div>
               </div>
             ))}
           </div>
+        </div>
+        
+        <!-- Mobile Navigation Buttons -->
+        <div class="flex justify-center gap-6 mt-8 lg:hidden">
+          <button id="prev-testimonial-mobile" class="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center hover:bg-primary hover:border-primary hover:text-white transition-all duration-300">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          </button>
+          <button id="next-testimonial-mobile" class="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center hover:bg-primary hover:border-primary hover:text-white transition-all duration-300">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </button>
         </div>
       </div>
     </div>
@@ -78,6 +88,8 @@ const testimonials = [
   const slides = track.querySelectorAll('.min-w-full');
   const prevBtn = document.getElementById('prev-testimonial');
   const nextBtn = document.getElementById('next-testimonial');
+  const prevBtnMobile = document.getElementById('prev-testimonial-mobile');
+  const nextBtnMobile = document.getElementById('next-testimonial-mobile');
   
   let current = 0;
   const total = slides.length;
@@ -86,19 +98,23 @@ const testimonials = [
     track.style.transform = `translateX(-${current * 100}%)`;
   }
   
-  prevBtn?.addEventListener('click', () => {
+  const handlePrev = () => {
     current = (current - 1 + total) % total;
     update();
-  });
+  };
   
-  nextBtn?.addEventListener('click', () => {
+  const handleNext = () => {
     current = (current + 1) % total;
     update();
-  });
+  };
+  
+  prevBtn?.addEventListener('click', handlePrev);
+  nextBtn?.addEventListener('click', handleNext);
+  prevBtnMobile?.addEventListener('click', handlePrev);
+  nextBtnMobile?.addEventListener('click', handleNext);
   
   // Auto switch every 10 seconds
   setInterval(() => {
-    current = (current + 1) % total;
-    update();
+    handleNext();
   }, 10000);
 </script>

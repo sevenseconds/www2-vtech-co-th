@@ -1,0 +1,18 @@
+---
+import { languages } from '../i18n/ui';
+import { getLangFromUrl } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+---
+<div class="flex gap-2">
+  {Object.entries(languages).map(([code, label]) => (
+    <a
+      href={code === 'th' ? '/' : `/${code}/`}
+      class={`lang-link text-[11px] font-bold uppercase tracking-widest px-2 py-1 rounded transition-colors ${
+        lang === code ? 'lang-link-active' : 'text-slate-400 hover:text-primary'
+      }`}
+    >
+      {label}
+    </a>
+  ))}
+</div>

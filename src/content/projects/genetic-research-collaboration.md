@@ -2,7 +2,7 @@
 title: "Genetic Research Collaboration"
 description: "Partnership with State University on large-scale population genetics study investigating hereditary disease markers."
 category: "Research"
-images: ["/images/projects/genetic-research.jpg"]
+images: ["/images/case-5.png"]
 date: 2025-08-10
 featured: false
 ---

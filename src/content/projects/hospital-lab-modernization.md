@@ -2,7 +2,7 @@
 title: "Hospital Laboratory Modernization"
 description: "Complete laboratory infrastructure upgrade for Metropolitan General Hospital, implementing automated systems and digital workflows."
 category: "Healthcare"
-images: ["/images/projects/hospital-lab-modernization.jpg"]
+images: ["/images/case-6.png"]
 date: 2025-12-15
 featured: true
 ---

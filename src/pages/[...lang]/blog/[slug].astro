@@ -1,28 +1,37 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { useTranslations } from '../../../i18n/utils';
 
 export async function getStaticPaths() {
   const blogPosts = await getCollection('blog');
-  return blogPosts.map(post => ({
-    params: { slug: post.slug },
-    props: { post },
-  }));
+  const langs = [undefined, 'en'];
+  
+  return langs.flatMap(lang => {
+    return blogPosts.map(post => ({
+      params: { lang, slug: post.slug },
+      props: { post },
+    }));
+  });
 }
 
 const { post } = Astro.props;
+const { lang: langParam } = Astro.params;
+const lang = (langParam || 'th') as 'en' | 'th';
+const t = useTranslations(lang);
 const { Content } = await post.render();
 
-const formattedDate = post.data.pubDate.toLocaleDateString('en-US', {
+const formattedDate = post.data.pubDate.toLocaleDateString(lang === 'en' ? 'en-US' : 'th-TH', {
   year: 'numeric',
   month: 'long',
   day: 'numeric'
 });
 ---
 
-<BaseLayout title={`${post.data.title} - V-TECH Blog`} description={post.data.description}>
+
+<BaseLayout title={`${post.data.title} - V-TECH Blog`} description={post.data.description} lang={lang}>
   <Header />
   
   <article class="section-padding bg-white">
