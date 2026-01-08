@@ -21,7 +21,8 @@ const { slides } = Astro.props;
       <div class={`absolute inset-0 transition-opacity duration-1000 slide ${index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'}`} data-index={index}>
         <div class="absolute inset-0 bg-zoom">
           <img src={slide.backgroundImage} alt="" class="w-full h-full object-cover" />
-          <div class="absolute inset-0 bg-black/15"></div>
+          <div class="absolute inset-0 bg-black/10"></div>
+          <div class="bg-mesh opacity-50"></div>
         </div>
       </div>
     ))}
@@ -34,8 +35,9 @@ const { slides } = Astro.props;
       <div class="h-10 md:h-12 lg:h-16 relative">
         
         <!-- Content Box: Anchored to the bottom of the control row -->
-        <div id="hero-content-box" class="absolute bottom-0 left-4 right-4 md:left-0 md:right-auto lg:left-4 bg-primary text-white max-w-md lg:max-w-lg shadow-2xl animate-content z-20 w-[calc(100%-2rem)] md:w-auto">
-          <div class="p-6 md:p-10 lg:p-12">
+        <div id="hero-content-box" class="absolute bottom-0 left-4 right-4 md:left-0 md:right-auto lg:left-4 bg-primary text-white max-w-md lg:max-w-lg shadow-2xl animate-content z-20 w-[calc(100%-2rem)] md:w-auto rounded-[30px] overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-br from-primary via-primary to-secondary opacity-95"></div>
+          <div class="relative p-6 md:p-10 lg:p-12">
             <div id="slide-content-wrapper">
               {slides.map((slide, index) => (
                 <div class={`slide-text ${index === 0 ? 'block' : 'hidden'}`} data-text-index={index}>
@@ -59,7 +61,7 @@ const { slides } = Astro.props;
         </div>
 
         <!-- Navigation Arrows: Fills the row height -->
-        <div class="absolute top-0 right-0 lg:right-4 hidden md:flex shadow-2xl bg-primary z-30 h-full">
+        <div class="absolute top-0 right-0 lg:right-4 hidden md:flex shadow-2xl bg-primary z-30 h-full rounded-full overflow-hidden">
           <button id="prev-slide" class="bg-primary hover:bg-secondary text-white w-10 h-10 md:w-12 md:h-12 lg:w-16 lg:h-full flex items-center justify-center transition-all duration-300 border-r border-white/10 group cursor-pointer">
             <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
           </button>

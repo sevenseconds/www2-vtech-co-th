@@ -11,15 +11,15 @@ const { title, description, icon, index, slug } = Astro.props;
 const formattedIndex = (index + 1).toString().padStart(2, '0');
 ---
 
-<div class="card group relative overflow-hidden h-full flex flex-col pt-16 pb-12 px-10 bg-white border-b-4 border-transparent hover:border-primary transition-all duration-500 shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)]">
+<div class="card group relative overflow-hidden h-full flex flex-col pt-16 pb-12 px-10 bg-white shadow-[0_4px_25px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_50px_rgba(77,184,233,0.15)] transition-all duration-500 rounded-[30px] border border-slate-50">
   <!-- Large Background Number -->
   <div class="absolute top-8 right-10 text-8xl font-black text-slate-50 group-hover:text-primary/5 transition-colors duration-500 font-heading select-none pointer-events-none">
     {formattedIndex}
   </div>
   
   <div class="mb-10 relative z-10 inline-block">
-    <div class="w-20 h-20 bg-accent rounded-2xl flex items-center justify-center group-hover:bg-primary transition-all duration-500 transform group-hover:rotate-6 shadow-sm group-hover:shadow-lg group-hover:shadow-primary/20">
-      <span class="text-4xl group-hover:scale-110 transition-transform duration-500 group-hover:filter group-hover:brightness-0 group-hover:invert">{icon || '🧪'}</span>
+    <div class="w-20 h-20 bg-accent rounded-[25px] flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-primary group-hover:to-secondary transition-all duration-500 transform group-hover:rotate-6 shadow-sm group-hover:shadow-lg group-hover:shadow-primary/20">
+      <span class="text-4xl group-hover:scale-110 transition-transform duration-500 group-hover:text-white">{icon || '🧪'}</span>
     </div>
   </div>
   
