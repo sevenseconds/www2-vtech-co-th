@@ -2,16 +2,46 @@
 interface Props {
   title: string;
   description: string;
-  icon: string;
+  icon?: string;
+  index: number;
+  slug?: string;
 }
 
-const { title, description, icon } = Astro.props;
+const { title, description, icon, index, slug } = Astro.props;
+const formattedIndex = (index + 1).toString().padStart(2, '0');
 ---
 
-<div class="card group hover:scale-105">
-  <div class="text-5xl mb-4 transform group-hover:scale-110 transition-transform duration-300">
-    {icon}
+<div class="card group relative overflow-hidden h-full flex flex-col pt-16 pb-12 px-10 bg-white border-b-4 border-transparent hover:border-primary transition-all duration-500 shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)]">
+  <!-- Large Background Number -->
+  <div class="absolute top-8 right-10 text-8xl font-black text-slate-50 group-hover:text-primary/5 transition-colors duration-500 font-heading select-none pointer-events-none">
+    {formattedIndex}
   </div>
-  <h3 class="text-xl font-bold mb-3 text-blue-900">{title}</h3>
-  <p class="text-slate-600 leading-relaxed">{description}</p>
+  
+  <div class="mb-10 relative z-10 inline-block">
+    <div class="w-20 h-20 bg-accent rounded-2xl flex items-center justify-center group-hover:bg-primary transition-all duration-500 transform group-hover:rotate-6 shadow-sm group-hover:shadow-lg group-hover:shadow-primary/20">
+      <span class="text-4xl group-hover:scale-110 transition-transform duration-500 group-hover:filter group-hover:brightness-0 group-hover:invert">{icon || '🧪'}</span>
+    </div>
+  </div>
+  
+  <h3 class="text-2xl font-bold mb-6 group-hover:text-primary transition-colors duration-300 font-heading tracking-tight flex-shrink-0 uppercase leading-tight">
+    {title}
+  </h3>
+  
+  <p class="text-slate-500 mb-10 leading-relaxed flex-grow text-[15px]">
+    {description}
+  </p>
+  
+  <div class="mt-auto">
+    <a href={`/services/${slug || title.toLowerCase().replace(/\s+/g, '-')}`} class="inline-flex items-center text-secondary hover:text-primary font-bold uppercase text-[11px] tracking-[0.2em] transition-all duration-300 group/link">
+      <span class="relative">
+        Read More
+        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover/link:w-full"></span>
+      </span>
+      <div class="ml-3 w-8 h-8 rounded-full border border-slate-200 flex items-center justify-center group-hover/link:border-primary group-hover/link:bg-primary group-hover/link:text-white transition-all duration-300">
+        <svg class="w-3.5 h-3.5 transform group-hover/link:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+        </svg>
+      </div>
+    </a>
+  </div>
 </div>

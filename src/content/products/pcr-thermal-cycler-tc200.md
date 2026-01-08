@@ -4,7 +4,7 @@ sku: "PCR-TC200"
 price: 15999
 description: "Advanced PCR thermal cycler with gradient functionality and touchscreen interface for precise molecular biology applications."
 category: "PCR Equipment"
-images: ["/images/products/pcr-tc200.jpg"]
+images: ["/images/products/pcr.png"]
 featured: false
 inStock: true
 ---

@@ -4,7 +4,7 @@ sku: "DMP-5000"
 price: 12999
 description: "Professional-grade digital microscope with 5000x magnification, 4K imaging, and AI-assisted analysis."
 category: "Microscopes"
-images: ["/images/products/microscope-5000.jpg"]
+images: ["/images/products/microscope.png"]
 featured: true
 inStock: true
 ---

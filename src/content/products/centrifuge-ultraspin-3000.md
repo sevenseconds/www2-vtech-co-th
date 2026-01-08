@@ -4,7 +4,7 @@ sku: "CUS-3000"
 price: 8499
 description: "High-performance laboratory centrifuge with variable speed control and advanced safety features."
 category: "Centrifuges"
-images: ["/images/products/centrifuge-3000.jpg"]
+images: ["/images/products/centrifuge.png"]
 featured: true
 inStock: true
 ---

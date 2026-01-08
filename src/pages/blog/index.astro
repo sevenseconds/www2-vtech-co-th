@@ -9,7 +9,7 @@ import { getCollection } from 'astro:content';
 const allPosts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
-<BaseLayout title="Blog - CoLabs" description="Latest insights on laboratory science, healthcare innovations, and testing advancements.">
+<BaseLayout title="Blog - V-TECH" description="Latest insights on laboratory science, healthcare innovations, and testing advancements.">
   <Header />
   
   <Hero 

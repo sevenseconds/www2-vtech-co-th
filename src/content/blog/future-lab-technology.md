@@ -3,7 +3,7 @@ title: "The Future of Medical Laboratory Technology"
 description: "Explore emerging trends and technologies shaping the future of medical laboratories worldwide."
 pubDate: 2026-01-01
 author: "Dr. Emily Rodriguez"
-image: "/images/blog/future-lab-tech.jpg"
+image: "/images/blog-1.png"
 tags: ["technology", "innovation", "future"]
 ---
 

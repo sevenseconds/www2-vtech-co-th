@@ -9,7 +9,7 @@ import {  getCollection } from 'astro:content';
 const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
 ---
 
-<BaseLayout title="Our Services - CoLabs" description="Comprehensive laboratory testing services including blood testing, pathology, microbiology, genetics, and more.">
+<BaseLayout title="Our Services - V-TECH" description="Comprehensive laboratory testing services including blood testing, pathology, microbiology, genetics, and more.">
   <Header />
   
   <Hero 
@@ -20,11 +20,13 @@ const services = (await getCollection('services')).sort((a, b) => a.data.order -
   <section class="section-padding bg-white">
     <div class="container-custom">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {services.map(service => (
+        {services.map((service, index) => (
           <ServiceCard 
             title={service.data.title}
             description={service.data.description}
             icon={service.data.icon}
+            index={index}
+            slug={service.slug}
           />
         ))}
       </div>

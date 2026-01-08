@@ -3,7 +3,7 @@ title: "Advanced Pathological Testing Methods"
 description: "Discover the latest advancements in pathological testing and how they're revolutionizing disease diagnosis."
 pubDate: 2026-01-03
 author: "Dr. Michael Chen"
-image: "/images/blog/pathological-testing.jpg"
+image: "/images/blog-3.png"
 tags: ["pathology", "testing", "diagnostics"]
 ---
 

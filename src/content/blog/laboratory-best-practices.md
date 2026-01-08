@@ -3,7 +3,7 @@ title: "Understanding Laboratory Best Practices"
 description: "Learn about the essential laboratory best practices that ensure accuracy, safety, and efficiency in scientific research."
 pubDate: 2026-01-05
 author: "Dr. Sarah Johnson"
-image: "/images/blog/lab-practices.jpg"
+image: "/images/blog-2.png"
 tags: ["laboratory", "safety", "best practices"]
 ---
 

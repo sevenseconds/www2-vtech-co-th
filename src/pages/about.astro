@@ -9,67 +9,69 @@ import { getCollection } from 'astro:content';
 const teamMembers = (await getCollection('team')).sort((a, b) => a.data.order - b.data.order);
 ---
 
-<BaseLayout title="About Us - CoLabs" description="Learn about our professional laboratory services, experienced team, and commitment to excellence.">
+<BaseLayout title="About Us - V-TECH" description="Learn about our professional laboratory services, experienced team, and commitment to excellence.">
   <Header />
   
   <Hero 
-    title="About CoLabs"
+    title="About V-TECH"
     subtitle="Leading the way in laboratory excellence with cutting-edge technology and expert professionals"
   />
   
   <!-- Mission Section -->
   <section class="section-padding bg-white">
     <div class="container-custom">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div>
-          <h2 class="text-4xl font-bold mb-6 text-gradient">Our Mission</h2>
-          <p class="text-lg text-slate-600 mb-4">
-            At CoLabs, we are dedicated to providing the highest quality laboratory services through 
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <div class="space-y-8">
+          <div class="space-y-4">
+            <div class="text-[10px] font-bold text-primary uppercase tracking-[0.4em]">Our Story & Mission</div>
+            <h2 class="text-4xl md:text-5xl font-bold font-heading uppercase leading-tight">Empowering Healthcare <br/>Through <span class="text-primary">Precision</span></h2>
+          </div>
+          <p class="text-lg text-slate-600 leading-relaxed">
+            At V-TECH, we are dedicated to providing the highest quality laboratory services through 
             advanced technology, rigorous quality control, and expert analysis. Our mission is to deliver 
             accurate, timely results that empower healthcare providers and support better patient outcomes.
           </p>
-          <p class="text-lg text-slate-600">
-            With over 15 years of experience, we have built a reputation for excellence in diagnostic testing, 
-            research support, and clinical laboratory services. Our state-of-the-art facilities and 
-            commitment to innovation make us a trusted partner for healthcare organizations worldwide.
-          </p>
-        </div>
-        <div class="bg-gradient-to-br from-blue-100 to-blue-50 rounded-2xl p-8">
-          <div class="space-y-6">
-            <div class="flex items-start gap-4">
-              <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="flex items-start gap-4 p-6 bg-slate-50 rounded-xl group hover:bg-primary transition-all duration-500">
+               <div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-white transition-colors">
+                <svg class="w-6 h-6 text-white group-hover:text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
               </div>
               <div>
-                <h3 class="text-xl font-bold mb-2 text-blue-900">Quality Assurance</h3>
-                <p class="text-slate-600">Rigorous quality control procedures ensuring accuracy and reliability</p>
+                <h3 class="font-bold text-secondary group-hover:text-white transition-colors font-heading uppercase text-sm tracking-widest">Quality Assurance</h3>
+                <p class="text-xs text-slate-500 group-hover:text-white/80 transition-colors mt-1">International Standards</p>
               </div>
             </div>
-            
-            <div class="flex items-start gap-4">
-              <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="flex items-start gap-4 p-6 bg-slate-50 rounded-xl group hover:bg-primary transition-all duration-500">
+               <div class="w-12 h-12 bg-primary rounded-lg flex items-center justify-center flex-shrink-0 group-hover:bg-white transition-colors">
+                <svg class="w-6 h-6 text-white group-hover:text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
                 </svg>
               </div>
               <div>
-                <h3 class="text-xl font-bold mb-2 text-blue-900">Advanced Technology</h3>
-                <p class="text-slate-600">State-of-the-art equipment and cutting-edge diagnostic methods</p>
+                <h3 class="font-bold text-secondary group-hover:text-white transition-colors font-heading uppercase text-sm tracking-widest">Fast Results</h3>
+                <p class="text-xs text-slate-500 group-hover:text-white/80 transition-colors mt-1">24h Turnaround Time</p>
               </div>
             </div>
-            
-            <div class="flex items-start gap-4">
-              <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
-                </svg>
-              </div>
-              <div>
-                <h3 class="text-xl font-bold mb-2 text-blue-900">Expert Team</h3>
-                <p class="text-slate-600">Highly qualified professionals with decades of combined experience</p>
-              </div>
+          </div>
+        </div>
+        
+        <div class="relative">
+          <div class="aspect-square bg-slate-100 rounded-3xl overflow-hidden shadow-2xl relative z-10">
+             <img src="/images/tech-section.png" alt="Laboratory" class="w-full h-full object-cover" />
+          </div>
+          <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-primary/10 rounded-full blur-3xl -z-10"></div>
+          <div class="absolute -top-10 -right-10 w-64 h-64 bg-secondary/5 rounded-full blur-3xl -z-10"></div>
+          
+          <!-- Floating Badge -->
+          <div class="absolute bottom-10 right-[-20px] bg-white p-6 shadow-2xl rounded-2xl z-20 flex items-center gap-4 animate-bounce-slow">
+            <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white">
+               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <div>
+              <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none">Accredited</div>
+              <div class="text-sm font-bold text-secondary font-heading uppercase tracking-wide">ISO 15189 Certified</div>
             </div>
           </div>
         </div>
@@ -78,24 +80,27 @@ const teamMembers = (await getCollection('team')).sort((a, b) => a.data.order - 
   </section>
   
   <!-- Stats Section -->
-  <section class="section-padding bg-gradient-to-r from-blue-900 to-blue-700 text-white">
-    <div class="container-custom">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
-        <div class="text-center">
-          <div class="text-5xl font-bold mb-2">25,000+</div>
-          <div class="text-xl text-blue-200">Tests Completed</div>
+  <section class="py-24 bg-secondary relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-full opacity-5">
+      <img src="/images/world-map.png" alt="" class="w-full h-full object-cover" />
+    </div>
+    <div class="container-custom relative z-10">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
+        <div class="text-center group">
+          <div class="text-5xl lg:text-7xl font-bold mb-4 text-white font-heading group-hover:text-primary transition-colors">500k+</div>
+          <div class="text-[11px] font-bold text-primary uppercase tracking-[0.3em]">Total Tests Done</div>
         </div>
-        <div class="text-center">
-          <div class="text-5xl font-bold mb-2">98.5%</div>
-          <div class="text-xl text-blue-200">Accuracy Rate</div>
+        <div class="text-center group">
+          <div class="text-5xl lg:text-7xl font-bold mb-4 text-white font-heading group-hover:text-primary transition-colors">99.9%</div>
+          <div class="text-[11px] font-bold text-primary uppercase tracking-[0.3em]">Testing Accuracy</div>
         </div>
-        <div class="text-center">
-          <div class="text-5xl font-bold mb-2">15+</div>
-          <div class="text-xl text-blue-200">Years Experience</div>
+        <div class="text-center group">
+          <div class="text-5xl lg:text-7xl font-bold mb-4 text-white font-heading group-hover:text-primary transition-colors">15+</div>
+          <div class="text-[11px] font-bold text-primary uppercase tracking-[0.3em]">Years of Journey</div>
         </div>
-        <div class="text-center">
-          <div class="text-5xl font-bold mb-2">500+</div>
-          <div class="text-xl text-blue-200">Healthcare Partners</div>
+        <div class="text-center group">
+          <div class="text-5xl lg:text-7xl font-bold mb-4 text-white font-heading group-hover:text-primary transition-colors">100+</div>
+          <div class="text-[11px] font-bold text-primary uppercase tracking-[0.3em]">Hospital Partners</div>
         </div>
       </div>
     </div>
@@ -104,14 +109,15 @@ const teamMembers = (await getCollection('team')).sort((a, b) => a.data.order - 
   <!-- Team Section -->
   <section class="section-padding bg-slate-50">
     <div class="container-custom">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl font-bold mb-4 text-gradient">Meet Our Team</h2>
-        <p class="text-xl text-slate-600 max-w-2xl mx-auto">
-          Our experienced professionals are dedicated to delivering exceptional laboratory services
-        </p>
+      <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 space-y-4 md:space-y-0 text-center md:text-left">
+        <div>
+          <div class="text-[10px] font-bold text-primary uppercase tracking-[0.4em] mb-4">The team behind V-TECH</div>
+          <h2 class="text-4xl md:text-5xl font-bold font-heading uppercase">Meet Our <span class="text-primary italic">Expert</span> Scientists</h2>
+        </div>
+        <a href="/contact" class="btn btn-primary">Work With Us</a>
       </div>
       
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
         {teamMembers.map(member => (
           <TeamMember 
             name={member.data.name}
@@ -128,3 +134,13 @@ const teamMembers = (await getCollection('team')).sort((a, b) => a.data.order - 
   
   <Footer />
 </BaseLayout>
+
+<style>
+  .animate-bounce-slow {
+    animation: bounce-slow 4s infinite ease-in-out;
+  }
+  @keyframes bounce-slow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+</style>

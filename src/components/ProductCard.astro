@@ -12,34 +12,44 @@ interface Props {
 const { name, price, description, image, sku, category, featured = false } = Astro.props;
 ---
 
-<div class="card relative overflow-hidden group">
+<div class="card bg-white p-6 rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] transition-all duration-500 overflow-hidden group border-none flex flex-col h-full">
   {featured && (
-    <div class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold z-10">
+    <div class="absolute top-6 left-6 bg-primary text-white text-[9px] font-bold uppercase tracking-[0.2em] px-3 py-1.5 z-20 shadow-lg">
       Featured
     </div>
   )}
   
-  <div class="aspect-square bg-slate-100 rounded-lg mb-4 overflow-hidden">
+  <div class="relative aspect-square bg-slate-50 rounded-2xl mb-8 overflow-hidden">
     <img 
       src={image} 
       alt={name} 
-      class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
+      class="w-full h-full object-contain p-4 mix-blend-multiply transform group-hover:scale-110 transition-transform duration-700"
       loading="lazy"
     />
+    <div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
   </div>
   
-  <div class="text-sm text-slate-500 mb-2">{category}</div>
-  <h3 class="text-xl font-bold mb-2 text-blue-900">{name}</h3>
-  <p class="text-slate-600 text-sm mb-4 line-clamp-2">{description}</p>
-  
-  <div class="flex items-center justify-between mt-auto">
-    <div class="text-2xl font-bold text-blue-900">
-      ${price.toLocaleString()}
+  <div class="space-y-4 flex flex-col flex-grow">
+    <div>
+      <div class="text-[10px] font-bold text-primary uppercase tracking-[0.2em] mb-2">{category}</div>
+      <h3 class="text-xl font-bold text-secondary group-hover:text-primary transition-colors font-heading uppercase leading-tight tracking-tight">{name}</h3>
     </div>
-    <button class="btn-primary text-sm px-4 py-2">
-      View Details
-    </button>
+    
+    <p class="text-slate-500 text-sm leading-relaxed line-clamp-2 h-10">{description}</p>
+    
+    <div class="mt-auto pt-6 border-t border-slate-50 flex items-center justify-between">
+      <div class="flex flex-col">
+          <span class="text-[10px] font-bold text-slate-300 uppercase tracking-widest leading-none mb-1">Price</span>
+          <span class="text-2xl font-bold text-secondary font-heading">${price.toLocaleString()}</span>
+      </div>
+      
+      <button class="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center text-secondary hover:bg-primary hover:border-primary hover:text-white transition-all duration-300 group/btn">
+         <svg class="w-5 h-5 transform group-hover/btn:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+        </svg>
+      </button>
+    </div>
+    
+    <div class="text-[9px] font-bold text-slate-300 uppercase tracking-widest text-right">SKU: {sku}</div>
   </div>
-  
-  <div class="text-xs text-slate-400 mt-2">SKU: {sku}</div>
 </div>

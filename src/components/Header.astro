@@ -1,70 +1,195 @@
 ---
-// Header component with navigation
+// Header component with 2-row navigation layout
 ---
 
-<header class="bg-white shadow-md sticky top-0 z-50">
-  <nav class="container-custom py-4">
-    <div class="flex items-center justify-between">
+<!-- Start: Header Component -->
+<header class="bg-white relative z-50">
+  <!-- Top Bar: Logo and Info -->
+  <div class="border-b border-slate-100 py-10 lg:py-12 bg-white">
+    <div class="container-custom flex flex-col lg:flex-row items-center justify-between space-y-6 lg:space-y-0 text-secondary">
       <!-- Logo -->
-      <a href="/" class="flex items-center space-x-3">
-        <div class="w-10 h-10 bg-gradient-to-br from-blue-900 to-blue-600 rounded-lg flex items-center justify-center">
-          <span class="text-white font-bold text-xl">C</span>
-        </div>
-        <span class="text-2xl font-bold text-blue-900">CoLabs</span>
+      <a href="/" class="flex items-center group">
+        <img src="/images/vtech_logo.png" alt="V-TECH Logo" class="h-14 md:h-18 lg:h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-105" />
       </a>
-      
-      <!-- Desktop Navigation -->
-      <div class="hidden md:flex items-center space-x-8">
-        <a href="/" class="text-slate-700 hover:text-blue-900 font-medium transition-colors">Home</a>
-        <a href="/about" class="text-slate-700 hover:text-blue-900 font-medium transition-colors">About Us</a>
-        
-        <!-- Services Dropdown -->
-        <div class="relative group">
-          <button class="text-slate-700 hover:text-blue-900 font-medium transition-colors flex items-center">
-            Services
-            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+
+      <!-- Contact Info Blocks -->
+      <div class="hidden md:flex items-center space-x-12">
+        <!-- Telephone -->
+        <div class="flex items-center space-x-5">
+          <div class="w-16 h-16 rounded-full flex items-center justify-center text-[#3368c6] bg-[#f3f7fd]">
+            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l2.1-2.1a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
             </svg>
-          </button>
-          <div class="absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
-            <a href="/services" class="block px-4 py-3 hover:bg-slate-50 text-slate-700 hover:text-blue-900">All Services</a>
-            <a href="/products" class="block px-4 py-3 hover:bg-slate-50 text-slate-700 hover:text-blue-900">Products</a>
+          </div>
+          <div>
+            <div class="text-[19px] font-medium text-[#09162a] font-heading leading-[29px]">Telephone</div>
+            <div class="text-[15px] font-normal text-[#999999] font-heading leading-[25px]">+66 (0) 2 123 4567</div>
           </div>
         </div>
-        
-        <a href="/projects" class="text-slate-700 hover:text-blue-900 font-medium transition-colors">Projects</a>
-        <a href="/blog" class="text-slate-700 hover:text-blue-900 font-medium transition-colors">Blog</a>
-        <a href="/contact" class="btn btn-primary text-sm">Contact Us</a>
+
+        <!-- Email -->
+        <div class="flex items-center space-x-5">
+          <div class="w-16 h-16 rounded-full flex items-center justify-center text-[#3368c6] bg-[#f3f7fd]">
+            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+            </svg>
+          </div>
+          <div>
+            <div class="text-[19px] font-medium text-[#09162a] font-heading leading-[29px]">Email Address</div>
+            <div class="text-[15px] font-normal text-[#999999] font-heading leading-[25px]">info@vtech-co.th</div>
+          </div>
+        </div>
+
+        <!-- Office -->
+        <div class="flex items-center space-x-5">
+          <div class="w-16 h-16 rounded-full flex items-center justify-center text-[#3368c6] bg-[#f3f7fd]">
+            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+          </div>
+          <div>
+            <div class="text-[19px] font-medium text-[#09162a] font-heading leading-[29px]">Office Address</div>
+            <div class="text-[15px] font-normal text-[#999999] font-heading leading-[25px]">Bangkok, Thailand</div>
+          </div>
+        </div>
       </div>
-      
-      <!-- Mobile Menu Button -->
-      <button id="mobile-menu-btn" class="md:hidden text-slate-700">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-      </button>
     </div>
-    
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="hidden md:hidden mt-4 pb-4">
-      <div class="flex flex-col space-y-3">
-        <a href="/" class="text-slate-700 hover:text-blue-900 font-medium transition-colors">Home</a>
-        <a href="/about" class="text-slate-700 hover:text-blue-900 font-medium transition-colors">About Us</a>
-        <a href="/services" class="text-slate-700 hover:text-blue-900 font-medium transition-colors">Services</a>
-        <a href="/products" class="text-slate-700 hover:text-blue-900 font-medium transition-colors">Products</a>
-        <a href="/projects" class="text-slate-700 hover:text-blue-900 font-medium transition-colors">Projects</a>
-        <a href="/blog" class="text-slate-700 hover:text-blue-900 font-medium transition-colors">Blog</a>
-        <a href="/contact" class="btn btn-primary text-sm w-full">Contact Us</a>
-      </div>
-    </div>
-  </nav>
+  </div>
 </header>
 
+<!-- Bottom Bar: Navigation -->
+<nav id="sticky-header" class="relative z-[100] -mt-8 -mb-8 sticky top-0 transition-all duration-300">
+  <!-- Full-width background wrapper -->
+  <div id="nav-bg-wrapper" class="w-full transition-all duration-500">
+    <div class="container-custom">
+      <div id="nav-container" class="bg-primary text-white shadow-2xl flex items-center justify-between transition-all duration-500 h-16">
+        
+        <div class="flex items-center h-full">
+          <!-- Logo in Nav (Sticky mode) -->
+          <div id="sticky-logo-container" class="hidden h-full items-center">
+            <a href="/" class="flex items-center">
+              <img src="/images/vtech_logo.png" alt="V-TECH Logo" class="h-8 w-auto object-contain" />
+            </a>
+          </div>
+
+          <!-- Desktop Navigation Links -->
+          <div id="nav-links-wrapper" class="hidden lg:flex items-center h-full nav-links transition-all duration-300">
+            <a href="/" class="px-6 h-full flex items-center hover:bg-black/10 font-heading font-bold uppercase text-[14px] tracking-[1px] transition-colors nav-link">Home</a>
+            <a href="/about" class="px-6 h-full flex items-center hover:bg-black/10 font-heading font-bold uppercase text-[14px] tracking-[1px] transition-colors nav-link">About</a>
+            <a href="/research" class="px-6 h-full flex items-center hover:bg-black/10 font-heading font-bold uppercase text-[14px] tracking-[1px] transition-colors nav-link">Research</a>
+            <a href="/services" class="px-6 h-full flex items-center hover:bg-black/10 font-heading font-bold uppercase text-[14px] tracking-[1px] transition-colors nav-link">Services</a>
+            <a href="/blog" class="px-6 h-full flex items-center hover:bg-black/10 font-heading font-bold uppercase text-[14px] tracking-[1px] transition-colors nav-link">Blog</a>
+            <a href="/contact" class="px-6 h-full flex items-center hover:bg-black/10 font-heading font-bold uppercase text-[14px] tracking-[1px] transition-colors nav-link">Contacts</a>
+          </div>
+        </div>
+
+        <div class="flex items-center h-full">
+          <!-- Cart Icon -->
+          <button class="relative h-full px-6 hover:bg-black/10 transition-colors hidden sm:flex items-center justify-center nav-icon">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+            <span class="absolute top-3 right-4 bg-secondary text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center border border-primary">0</span>
+          </button>
+
+          <!-- Search icon -->
+          <button class="h-full px-6 hover:bg-black/10 transition-colors hidden sm:block nav-icon">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          </button>
+
+          <!-- Consultation Button -->
+          <a href="/contact" class="bg-secondary text-white px-10 h-full flex items-center font-heading font-bold uppercase text-[14px] tracking-[1px] hover:bg-white hover:text-secondary transition-all duration-300">
+            Consultation
+          </a>
+          
+          <!-- Mobile Menu Toggle -->
+          <button id="mobile-menu-btn" class="lg:hidden h-full px-6 hover:bg-black/10 transition-colors nav-icon">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu Content -->
+      <div id="mobile-menu" class="hidden lg:hidden bg-secondary border-t border-white/10 py-4 absolute top-full left-4 right-4 z-40 shadow-2xl">
+        <div class="container-custom flex flex-col space-y-4 font-heading font-bold uppercase text-[14px] tracking-[1px] pb-4">
+          <a href="/" class="hover:text-primary py-2 border-b border-white/5">Home</a>
+          <a href="/about" class="hover:text-primary py-2 border-b border-white/5">About</a>
+          <a href="/research" class="hover:text-primary py-2 border-b border-white/5">Research</a>
+          <a href="/services" class="hover:text-primary py-2 border-b border-white/5">Services</a>
+          <a href="/blog" class="hover:text-primary py-2 border-b border-white/5">Blog</a>
+          <a href="/contact" class="hover:text-primary py-2">Contacts</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
 <script>
+  const navContainer = document.getElementById('nav-container');
+  const navBgWrapper = document.getElementById('nav-bg-wrapper');
+  const stickyLogoContainer = document.getElementById('sticky-logo-container');
+  const navLinksWrapper = document.getElementById('nav-links-wrapper');
+  const navLinksList = document.querySelectorAll('.nav-link');
+  const navIcons = document.querySelectorAll('.nav-icon');
+
+  const handleScroll = () => {
+    if (window.scrollY > 160) {
+      // Background expansion
+      navBgWrapper?.classList.add('bg-white', 'shadow-xl');
+      
+      // Container height and room
+      navContainer?.classList.remove('bg-primary', 'text-white', 'shadow-2xl');
+      navContainer?.classList.add('bg-white', 'text-secondary', 'h-20');
+      navContainer?.classList.remove('h-16');
+      
+      // Sticky logo
+      stickyLogoContainer?.classList.remove('hidden');
+      stickyLogoContainer?.classList.add('flex', 'mr-8');
+      
+      // Links and Icons color
+      navLinksList.forEach(a => {
+        a.classList.remove('text-white');
+        a.classList.add('text-secondary');
+      });
+      navIcons.forEach(btn => {
+        btn.classList.add('text-secondary');
+        btn.classList.remove('text-white');
+      });
+
+    } else {
+      // Restore background
+      navBgWrapper?.classList.remove('bg-white', 'shadow-xl');
+      
+      // Restore container size and padding
+      navContainer?.classList.add('bg-primary', 'text-white', 'shadow-2xl');
+      navContainer?.classList.remove('bg-white', 'text-secondary', 'h-20');
+      navContainer?.classList.add('h-16');
+      
+      // Hide sticky logo
+      stickyLogoContainer?.classList.add('hidden');
+      stickyLogoContainer?.classList.remove('flex', 'mr-8');
+      
+      // Restore colors
+      navLinksList.forEach(a => {
+        a.classList.add('text-white');
+        a.classList.remove('text-secondary');
+      });
+      navIcons.forEach(btn => {
+        btn.classList.remove('text-secondary');
+        btn.classList.add('text-white');
+      });
+    }
+  };
+
+  window.addEventListener('scroll', handleScroll);
+  handleScroll();
+
+  // Mobile menu toggle
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
-  
+
   mobileMenuBtn?.addEventListener('click', () => {
     mobileMenu?.classList.toggle('hidden');
   });
 </script>
+<!-- End: Header Component -->
