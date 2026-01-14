@@ -1,0 +1,259 @@
+---
+interface Props {
+    className?: string;
+}
+
+const { className } = Astro.props;
+
+const slides = [
+    {
+        image: "/images/slider/microscope-lab.png",
+        title: "Precision Microscopy",
+        subtitle: "Advanced digital imaging for the modern laboratory.",
+        category: "Optics & Imaging",
+    },
+    {
+        image: "/images/slider/centrifuge-lab.png",
+        title: "High-Speed Ceterifugation",
+        subtitle: "Reliable sample separation with precise control.",
+        category: "Sample Prep",
+    },
+    {
+        image: "/images/slider/analyzer-lab.png",
+        title: "Automated Analysis",
+        subtitle:
+            "High-throughput chemistry analysis for research and diagnostics.",
+        category: "Analytical Instruments",
+    },
+];
+---
+
+<div
+    class:list={[
+        "relative w-full h-[480px] md:h-[580px] lg:h-[680px] overflow-hidden group",
+        className,
+    ]}
+    id="product-slider"
+>
+    <!-- Slides Container -->
+    <div
+        class="absolute inset-0 flex transition-transform duration-700 ease-in-out h-full"
+        id="slider-track"
+    >
+        {
+            slides.map((slide, index) => (
+                <div class="w-full h-full flex-shrink-0 relative">
+                    <img
+                        src={slide.image}
+                        alt={slide.title}
+                        class="w-full h-full object-cover"
+                    />
+                    <div class="absolute inset-0 bg-black/20" />
+
+                    <div class="absolute inset-0 container-custom h-full flex items-center pointer-events-none">
+                        <div class="bg-primary/95 text-white p-10 md:p-14 lg:p-20 max-w-xl relative z-10 -mt-20 lg:-mt-32 shadow-2xl rounded-[30px] opacity-0 translate-y-10 transition-all duration-700 delay-300 slide-content pointer-events-auto">
+                            <div class="bg-white text-primary px-5 py-1.5 inline-block text-[11px] font-bold uppercase tracking-[0.2em] mb-10 font-heading">
+                                {slide.category}
+                            </div>
+
+                            <h2 class="text-4xl md:text-5xl lg:text-7xl font-bold mb-10 leading-[1.1] font-heading text-white uppercase tracking-tight">
+                                {slide.title}
+                            </h2>
+
+                            <p class="text-[15px] md:text-base text-white/90 mb-12 leading-relaxed max-w-md font-medium">
+                                {slide.subtitle}
+                            </p>
+
+                            <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
+                                <a
+                                    href="#"
+                                    class="text-[12px] font-bold uppercase tracking-[0.3em] border-b-2 border-white/40 pb-1 hover:text-white hover:border-white transition-all font-heading inline-block"
+                                >
+                                    View Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ))
+        }
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div
+        class="absolute bottom-10 right-10 lg:bottom-20 lg:right-20 flex z-20 shadow-2xl rounded-full overflow-hidden"
+    >
+        <button
+            id="prev-slide"
+            class="bg-primary/90 hover:bg-secondary text-white w-14 h-14 md:w-16 md:h-16 flex items-center justify-center transition-all duration-300 border-r border-white/10 group rounded-l-full"
+            aria-label="Previous Slide"
+        >
+            <svg
+                class="w-6 h-6 group-hover:-translate-x-1 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 19l-7-7 7-7"></path>
+            </svg>
+        </button>
+        <button
+            id="next-slide"
+            class="bg-primary/90 hover:bg-secondary text-white w-14 h-14 md:w-16 md:h-16 flex items-center justify-center transition-all duration-300 group rounded-r-full"
+            aria-label="Next Slide"
+        >
+            <svg
+                class="w-6 h-6 group-hover:translate-x-1 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"></path>
+            </svg>
+        </button>
+    </div>
+
+    <!-- Dots -->
+    <div
+        class="absolute bottom-10 left-1/2 -translate-x-1/2 flex space-x-3 z-20"
+    >
+        {
+            slides.map((_, i) => (
+                <button
+                    class="w-2.5 h-2.5 rounded-full bg-white/40 transition-all duration-300 hover:bg-white data-[active=true]:bg-white data-[active=true]:w-8 data-[active=true]:rounded-xl slider-dot"
+                    data-index={i}
+                    aria-label={`Go to slide ${i + 1}`}
+                />
+            ))
+        }
+    </div>
+</div>
+
+<script>
+    let autoplayInterval: ReturnType<typeof setInterval> | null = null;
+
+    function cleanup() {
+        if (autoplayInterval) {
+            clearInterval(autoplayInterval);
+            autoplayInterval = null;
+        }
+    }
+
+    function setupSlider() {
+        // Always cleanup existing interval before setting up (e.g. navigation)
+        cleanup();
+
+        const slider = document.getElementById("product-slider");
+        if (!slider) return;
+
+        const track = slider.querySelector("#slider-track") as HTMLElement;
+        const slides = Array.from(track.children);
+        const prevBtn = slider.querySelector("#prev-slide");
+        const nextBtn = slider.querySelector("#next-slide");
+        const dots = slider.querySelectorAll(".slider-dot");
+
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+
+        function updateSlider() {
+            if (!track) return;
+            // Move track
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+            // Update dots
+            dots.forEach((dot, index) => {
+                if (index === currentIndex) {
+                    dot.setAttribute("data-active", "true");
+                } else {
+                    dot.setAttribute("data-active", "false");
+                }
+            });
+
+            // Animate content
+            slides.forEach((slide, index) => {
+                const content = slide.querySelector(".slide-content");
+                if (content) {
+                    if (index === currentIndex) {
+                        content.classList.remove("opacity-0", "translate-y-10");
+                        content.classList.add("opacity-100", "translate-y-0");
+                    } else {
+                        // Reset others
+                        content.classList.add("opacity-0", "translate-y-10");
+                        content.classList.remove(
+                            "opacity-100",
+                            "translate-y-0",
+                        );
+                    }
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlider();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        }
+
+        function goToSlide(index: number) {
+            currentIndex = index;
+            updateSlider();
+        }
+
+        // Event Listeners
+        nextBtn?.addEventListener("click", () => {
+            nextSlide();
+            resetAutoplay();
+        });
+
+        prevBtn?.addEventListener("click", () => {
+            prevSlide();
+            resetAutoplay();
+        });
+
+        dots.forEach((dot) => {
+            dot.addEventListener("click", (e) => {
+                const index = parseInt(
+                    (e.target as HTMLElement).getAttribute("data-index") || "0",
+                );
+                goToSlide(index);
+                resetAutoplay();
+            });
+        });
+
+        function startAutoplay() {
+            // Clear any potential existing interval first (extra safety)
+            if (autoplayInterval) clearInterval(autoplayInterval);
+            autoplayInterval = setInterval(nextSlide, 5000);
+        }
+
+        function resetAutoplay() {
+            if (autoplayInterval) clearInterval(autoplayInterval);
+            startAutoplay();
+        }
+
+        // Initialize
+        updateSlider();
+        startAutoplay();
+    }
+
+    // Setup on page load
+    setupSlider();
+
+    // Re-run on view transitions
+    document.addEventListener("astro:page-load", setupSlider);
+
+    // Cleanup before swapping to a new page
+    document.addEventListener("astro:before-swap", cleanup);
+</script>
