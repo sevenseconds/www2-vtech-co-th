@@ -1,4 +1,5 @@
 ---
+lang: en
 name: "Digital Microscope Pro 5000"
 sku: "DMP-5000"
 price: 12999

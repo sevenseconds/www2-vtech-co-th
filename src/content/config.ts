@@ -11,6 +11,7 @@ const blog = defineCollection({
     image: z.string().optional(),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
+    lang: z.enum(['en', 'th']).default('en'),
   }),
 });
 
@@ -22,6 +23,7 @@ const services = defineCollection({
     description: z.string(),
     icon: z.string(), // Icon name or emoji
     order: z.number().default(0),
+    lang: z.enum(['en', 'th']).default('en'),
   }),
 });
 
@@ -37,6 +39,7 @@ const products = defineCollection({
     images: z.array(z.string()),
     featured: z.boolean().default(false),
     inStock: z.boolean().default(true),
+    lang: z.enum(['en', 'th']).default('th'),
   }),
 });
 
@@ -51,6 +54,7 @@ const team = defineCollection({
     linkedin: z.string().optional(),
     twitter: z.string().optional(),
     order: z.number().default(0),
+    lang: z.enum(['en', 'th']).default('en'),
   }),
 });
 
@@ -64,6 +68,7 @@ const projects = defineCollection({
     images: z.array(z.string()),
     date: z.coerce.date(),
     featured: z.boolean().default(false),
+    lang: z.enum(['en', 'th']).default('en'),
   }),
 });
 

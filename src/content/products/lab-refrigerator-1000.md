@@ -1,4 +1,5 @@
 ---
+lang: en
 name: "Lab Refrigerator LR-1000"
 sku: "LR-1000"
 price: 3499

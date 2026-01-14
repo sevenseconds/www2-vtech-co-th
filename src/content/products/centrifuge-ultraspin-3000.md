@@ -1,4 +1,5 @@
 ---
+lang: en
 name: "Centrifuge UltraSpin 3000"
 sku: "CUS-3000"
 price: 8499

@@ -52,6 +52,8 @@ h6 {
   transition: all 0.3s ease;
   font-family: var(--font-heading);
   font-size: 0.875rem;
+  border-radius: 9999px;
+  /* rounded-full to match reference */
 }
 
 .btn-primary {
@@ -89,6 +91,17 @@ h6 {
   padding: 2rem;
   transition: all 0.3s;
   border-bottom: 3px solid transparent;
+  border-radius: 1.5rem;
+  /* rounded-3xl (24px) to match reference */
+  overflow: hidden;
+}
+
+/* Form Styles */
+input,
+textarea,
+select {
+  border-radius: 0 !important;
+  /* Sharp corners for forms to match reference */
 }
 
 .card:hover {

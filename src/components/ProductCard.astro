@@ -1,4 +1,6 @@
 ---
+import { useTranslations } from "../i18n/utils";
+
 interface Props {
   name: string;
   price: number;
@@ -6,50 +8,114 @@ interface Props {
   image: string;
   sku: string;
   category: string;
+  slug: string;
+  lang: "en" | "th";
   featured?: boolean;
 }
 
-const { name, price, description, image, sku, category, featured = false } = Astro.props;
+const {
+  name,
+  price,
+  description,
+  image,
+  sku,
+  category,
+  slug,
+  lang,
+  featured = false,
+} = Astro.props;
+
+const t = useTranslations(lang);
+
+const safeSlug = slug.split("/").pop();
+
+const productUrl =
+  lang === "th" ? `/products/${safeSlug}` : `/${lang}/products/${safeSlug}`;
 ---
 
-<div class="card bg-white p-6 rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] transition-all duration-500 overflow-hidden group border-none flex flex-col h-full">
-  {featured && (
-    <div class="absolute top-6 left-6 bg-primary text-white text-[9px] font-bold uppercase tracking-[0.2em] px-3 py-1.5 z-20 shadow-lg">
-      Featured
-    </div>
-  )}
-  
-  <div class="relative aspect-square bg-slate-50 rounded-2xl mb-8 overflow-hidden">
-    <img 
-      src={image} 
-      alt={name} 
+<div
+  class="card bg-white p-6 rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.08)] transition-all duration-500 overflow-hidden group border-none flex flex-col h-full relative"
+>
+  {
+    featured && (
+      <div class="absolute top-6 left-6 bg-primary text-white text-[9px] font-bold uppercase tracking-[0.2em] px-3 py-1.5 z-20 shadow-lg">
+        {t("product.featured_label")}
+      </div>
+    )
+  }
+
+  <a
+    href={productUrl}
+    class="block mb-8 relative aspect-square bg-slate-50 rounded-2xl overflow-hidden"
+  >
+    <img
+      src={image}
+      alt={name}
       class="w-full h-full object-contain p-4 mix-blend-multiply transform group-hover:scale-110 transition-transform duration-700"
       loading="lazy"
     />
-    <div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-  </div>
-  
+    <div
+      class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+    >
+    </div>
+  </a>
+
   <div class="space-y-4 flex flex-col flex-grow">
     <div>
-      <div class="text-[10px] font-bold text-primary uppercase tracking-[0.2em] mb-2">{category}</div>
-      <h3 class="text-xl font-bold text-secondary group-hover:text-primary transition-colors font-heading uppercase leading-tight tracking-tight">{name}</h3>
-    </div>
-    
-    <p class="text-slate-500 text-sm leading-relaxed line-clamp-2 h-10">{description}</p>
-    
-    <div class="mt-auto pt-6 border-t border-slate-50 flex items-center justify-between">
-      <div class="flex flex-col">
-          <span class="text-[10px] font-bold text-slate-300 uppercase tracking-widest leading-none mb-1">Price</span>
-          <span class="text-2xl font-bold text-secondary font-heading">${price.toLocaleString()}</span>
+      <div
+        class="text-[10px] font-bold text-primary uppercase tracking-[0.2em] mb-2"
+      >
+        {category}
       </div>
-      
-      <button class="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center text-secondary hover:bg-primary hover:border-primary hover:text-white transition-all duration-300 group/btn">
-         <svg class="w-5 h-5 transform group-hover/btn:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-        </svg>
-      </button>
+      <a href={productUrl} class="block">
+        <h3
+          class="text-xl font-bold text-secondary hover:text-primary transition-colors font-heading uppercase leading-tight tracking-tight"
+        >
+          {name}
+        </h3>
+      </a>
     </div>
-    
-    <div class="text-[9px] font-bold text-slate-300 uppercase tracking-widest text-right">SKU: {sku}</div>
+
+    <p class="text-slate-500 text-sm leading-relaxed line-clamp-2 h-10">
+      {description}
+    </p>
+
+    <div
+      class="mt-auto pt-6 border-t border-slate-50 flex items-center justify-between"
+    >
+      <div class="flex flex-col">
+        <span
+          class="text-[10px] font-bold text-slate-300 uppercase tracking-widest leading-none mb-1"
+          >{t("product.price_label")}</span
+        >
+        <span class="text-2xl font-bold text-secondary font-heading"
+          >{lang === "th" ? "฿" : "$"}{price.toLocaleString()}</span
+        >
+      </div>
+
+      <a
+        href={productUrl}
+        class="w-12 h-12 rounded-full border border-slate-200 flex items-center justify-center text-secondary hover:bg-primary hover:border-primary hover:text-white transition-all duration-300 group/btn"
+      >
+        <svg
+          class="w-5 h-5 transform group-hover/btn:translate-x-0.5 transition-transform"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2.5"
+            d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+        </svg>
+      </a>
+    </div>
+
+    <div
+      class="text-[9px] font-bold text-slate-300 uppercase tracking-widest text-right"
+    >
+      {t("product.sku")}: {sku}
+    </div>
   </div>
 </div>

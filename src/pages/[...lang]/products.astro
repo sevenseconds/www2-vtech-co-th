@@ -1,43 +1,75 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import Hero from '../../components/Hero.astro';
-import ProductCard from '../../components/ProductCard.astro';
-import { getCollection } from 'astro:content';
-import { useTranslations } from '../../i18n/utils';
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import Hero from "../../components/Hero.astro";
+import ProductCard from "../../components/ProductCard.astro";
+import { getCollection } from "astro:content";
+import { useTranslations } from "../../i18n/utils";
 
 export function getStaticPaths() {
-  return [
-    { params: { lang: undefined } },
-    { params: { lang: 'en' } },
-  ];
+  return [{ params: { lang: undefined } }, { params: { lang: "en" } }];
 }
 
 const { lang: langParam } = Astro.params;
-const lang = langParam || 'th';
-const t = useTranslations(lang as 'en' | 'th');
-const products = await getCollection('products');
-const featuredProducts = products.filter(p => p.data.featured);
-const regularProducts = products.filter(p => !p.data.featured);
+const lang = (langParam || "th") as "en" | "th";
+const t = useTranslations(lang);
+
+const products = await getCollection("products", ({ data }) => {
+  return data.lang === lang;
+});
+
+const featuredProducts = products.filter((p) => p.data.featured);
+const regularProducts = products.filter((p) => !p.data.featured);
 ---
 
-
-<BaseLayout title="Our Products - V-TECH" description="Professional laboratory equipment and products for accurate diagnostics and research." lang={lang}>
+<BaseLayout
+  title={`${t("nav.products")} - ${t("site.title")}`}
+  description={t("site.description")}
+  lang={lang}
+>
   <Header />
-  
-  <Hero 
-    title="Laboratory Products"
-    subtitle="Professional-grade laboratory equipment and supplies for accurate diagnostics and cutting-edge research"
-  />
-  
-  {featuredProducts.length > 0 && (
-    <section class="section-padding bg-slate-50">
-      <div class="container-custom">
-        <h2 class="text-3xl font-bold mb-8 text-blue-900">Featured Products</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {featuredProducts.map(product => (
-            <ProductCard 
+
+  <Hero title={t("products.title")} subtitle={t("products.subtitle")} />
+
+  {
+    featuredProducts.length > 0 && (
+      <section class="section-padding bg-slate-50">
+        <div class="container-custom">
+          <h2 class="text-3xl font-bold mb-8 text-blue-900">
+            {t("products.featured")}
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {featuredProducts.map((product) => (
+              <ProductCard
+                name={product.data.name}
+                price={product.data.price}
+                description={product.data.description}
+                image={product.data.images[0]}
+                sku={product.data.sku}
+                category={product.data.category}
+                featured={product.data.featured}
+                slug={product.slug}
+                lang={lang}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="section-padding bg-white">
+    <div class="container-custom">
+      <h2 class="text-3xl font-bold mb-8 text-blue-900">
+        {t("products.all")}
+      </h2>
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+      >
+        {
+          regularProducts.map((product) => (
+            <ProductCard
               name={product.data.name}
               price={product.data.price}
               description={product.data.description}
@@ -45,31 +77,14 @@ const regularProducts = products.filter(p => !p.data.featured);
               sku={product.data.sku}
               category={product.data.category}
               featured={product.data.featured}
+              slug={product.slug}
+              lang={lang}
             />
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
-  
-  <section class="section-padding bg-white">
-    <div class="container-custom">
-      <h2 class="text-3xl font-bold mb-8 text-blue-900">All Products</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-        {regularProducts.map(product => (
-          <ProductCard 
-            name={product.data.name}
-            price={product.data.price}
-            description={product.data.description}
-            image={product.data.images[0]}
-            sku={product.data.sku}
-            category={product.data.category}
-            featured={product.data.featured}
-          />
-        ))}
+          ))
+        }
       </div>
     </div>
   </section>
-  
+
   <Footer />
 </BaseLayout>

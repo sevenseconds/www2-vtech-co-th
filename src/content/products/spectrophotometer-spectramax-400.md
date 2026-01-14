@@ -1,4 +1,5 @@
 ---
+lang: en
 name: "Spectrophotometer SpectraMax 400"
 sku: "SM-400"
 price: 9999

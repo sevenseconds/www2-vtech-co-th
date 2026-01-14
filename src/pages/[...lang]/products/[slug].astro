@@ -1,0 +1,166 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import Header from "../../../components/Header.astro";
+import Footer from "../../../components/Footer.astro";
+import { useTranslations } from "../../../i18n/utils";
+
+export async function getStaticPaths() {
+    const products = await getCollection("products");
+
+    return products.map((product) => {
+        const lang = product.data.lang === "th" ? undefined : "en";
+        // Extract filename from slug (e.g. "th/analytical-balance" -> "analytical-balance")
+        const slug = product.slug.split("/").pop();
+
+        return {
+            params: { lang, slug },
+            props: { product },
+        };
+    });
+}
+
+const { product } = Astro.props;
+const { lang: langParam } = Astro.params;
+const lang = (langParam || "th") as "en" | "th";
+const t = useTranslations(lang);
+const { Content } = await product.render();
+
+const backToProductsUrl = lang === "th" ? "/products" : `/${lang}/products`;
+---
+
+<BaseLayout
+    title={`${product.data.name} - ${t("site.title")}`}
+    description={product.data.description}
+    lang={lang}
+>
+    <Header />
+
+    <main class="section-padding bg-white min-h-[70vh]">
+        <div class="container-custom">
+            <!-- Back Link -->
+            <a
+                href={backToProductsUrl}
+                class="inline-flex items-center text-primary font-bold uppercase tracking-widest text-[10px] gap-2 mb-12 hover:gap-3 transition-all duration-300"
+            >
+                <svg
+                    class="w-4 h-4 rotate-180"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2.5"
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+                {t("product.back")}
+            </a>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                <!-- Product Images -->
+                <div class="space-y-6">
+                    <div
+                        class="aspect-square bg-slate-50 rounded-2xl overflow-hidden p-8 flex items-center justify-center"
+                    >
+                        <img
+                            src={product.data.images[0]}
+                            alt={product.data.name}
+                            class="w-full h-full object-contain mix-blend-multiply"
+                        />
+                    </div>
+
+                    {
+                        product.data.images.length > 1 && (
+                            <div class="grid grid-cols-4 gap-4">
+                                {product.data.images.map((img) => (
+                                    <div class="aspect-square bg-slate-50 rounded-xl overflow-hidden p-2">
+                                        <img
+                                            src={img}
+                                            alt=""
+                                            class="w-full h-full object-contain mix-blend-multiply"
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                        )
+                    }
+                </div>
+
+                <!-- Product Info -->
+                <div class="space-y-8">
+                    <div>
+                        <div
+                            class="text-[12px] font-bold text-primary uppercase tracking-[0.3em] mb-4"
+                        >
+                            {product.data.category}
+                        </div>
+                        <h1
+                            class="text-4xl md:text-5xl font-bold text-secondary font-heading uppercase leading-tight tracking-tight mb-4"
+                        >
+                            {product.data.name}
+                        </h1>
+                        <div
+                            class="text-slate-400 font-medium tracking-widest text-sm uppercase"
+                        >
+                            {t("product.sku")}: {product.data.sku}
+                        </div>
+                    </div>
+
+                    <div class="text-3xl font-bold text-secondary font-heading">
+                        {lang === "th" ? "฿" : "$"}{
+                            product.data.price.toLocaleString()
+                        }
+                    </div>
+
+                    <p
+                        class="text-slate-600 text-lg leading-relaxed border-l-4 border-primary/20 pl-6 py-2"
+                    >
+                        {product.data.description}
+                    </p>
+
+                    <div class="pt-8 border-t border-slate-100">
+                        <h2
+                            class="text-xl font-bold text-secondary uppercase tracking-wider mb-6"
+                        >
+                            {t("product.details")}
+                        </h2>
+                        <div
+                            class="prose prose-slate max-w-none
+              prose-headings:text-secondary prose-headings:font-bold prose-headings:uppercase prose-headings:tracking-tight
+              prose-strong:text-secondary prose-strong:font-bold
+              prose-li:text-slate-600
+              prose-p:text-slate-600 prose-p:leading-relaxed"
+                        >
+                            <Content />
+                        </div>
+                    </div>
+
+                    <div class="pt-8">
+                        <a
+                            href="tel:027425340"
+                            class="bg-secondary text-white px-10 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-[12px] hover:bg-primary transition-all duration-300 shadow-xl hover:shadow-primary/20 inline-flex items-center gap-4 group"
+                        >
+                            {t("product.contact")}
+                            <svg
+                                class="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2.5"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <Footer />
+</BaseLayout>

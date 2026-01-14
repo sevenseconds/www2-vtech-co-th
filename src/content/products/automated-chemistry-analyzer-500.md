@@ -1,4 +1,5 @@
 ---
+lang: en
 name: "Automated Chemistry Analyzer AC-500"
 sku: "ACA-500"
 price: 45000

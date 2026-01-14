@@ -1,4 +1,5 @@
 ---
+lang: en
 name: "PCR Thermal Cycler TC-200"
 sku: "PCR-TC200"
 price: 15999

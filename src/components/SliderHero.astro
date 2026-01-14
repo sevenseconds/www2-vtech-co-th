@@ -16,15 +16,26 @@ const { slides } = Astro.props;
 <!-- Start: SliderHero Component -->
 <section id="slider-hero" class="relative bg-white">
   <!-- Viewport for background images -->
-  <div class="relative h-[480px] md:h-[580px] lg:h-[680px] overflow-hidden bg-slate-900 border-b-0">
-    {slides.map((slide, index) => (
-      <div class={`absolute inset-0 transition-opacity duration-1000 slide ${index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0'}`} data-index={index}>
-        <div class="absolute inset-0 bg-zoom">
-          <img src={slide.backgroundImage} alt="" class="w-full h-full object-cover" />
-          <div class="absolute inset-0 bg-black/15"></div>
+  <div
+    class="relative h-[480px] md:h-[580px] lg:h-[680px] overflow-hidden bg-slate-900 border-b-0"
+  >
+    {
+      slides.map((slide, index) => (
+        <div
+          class={`absolute inset-0 transition-opacity duration-1000 slide ${index === 0 ? "opacity-100 z-10" : "opacity-0 z-0"}`}
+          data-index={index}
+        >
+          <div class="absolute inset-0 bg-zoom">
+            <img
+              src={slide.backgroundImage}
+              alt=""
+              class="w-full h-full object-cover"
+            />
+            <div class="absolute inset-0 bg-black/15" />
+          </div>
         </div>
-      </div>
-    ))}
+      ))
+    }
   </div>
 
   <!-- Control Area -->
@@ -32,55 +43,96 @@ const { slides } = Astro.props;
     <div class="container-custom">
       <!-- Fixed height row that starts at the viewport bottom -->
       <div class="h-10 md:h-12 lg:h-16 relative">
-        
         <!-- Content Box: Anchored to the bottom of the control row -->
-        <div id="hero-content-box" class="absolute bottom-0 left-4 right-4 md:left-0 md:right-auto lg:left-4 bg-primary text-white max-w-md lg:max-w-lg shadow-2xl animate-content z-20 w-[calc(100%-2rem)] md:w-auto">
+        <div
+          id="hero-content-box"
+          class="absolute bottom-0 left-4 right-4 md:left-0 md:right-auto lg:left-4 bg-primary text-white max-w-md lg:max-w-lg shadow-2xl animate-content z-20 w-[calc(100%-2rem)] md:w-auto rounded-[30px]"
+        >
           <div class="p-6 md:p-10 lg:p-12">
             <div id="slide-content-wrapper">
-              {slides.map((slide, index) => (
-                <div class={`slide-text ${index === 0 ? 'block' : 'hidden'}`} data-text-index={index}>
-                  <h1 class="text-xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 leading-[1.2] font-heading text-white uppercase tracking-tight">
-                    {slide.title}
-                  </h1>
-                  
-                  {slide.subtitle && (
-                    <p class="text-sm md:text-lg text-white/90 mb-6 md:mb-8 leading-relaxed font-medium max-w-md">
-                      {slide.subtitle}
-                    </p>
-                  )}
-                  
-                  <a href="/about" class="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.3em] border-b-2 border-white/40 pb-1 hover:text-white hover:border-white transition-all font-heading inline-block">
-                    Learn More
-                  </a>
-                </div>
-              ))}
+              {
+                slides.map((slide, index) => (
+                  <div
+                    class={`slide-text ${index === 0 ? "block" : "hidden"}`}
+                    data-text-index={index}
+                  >
+                    <h1 class="text-xl md:text-3xl lg:text-4xl font-bold mb-4 md:mb-6 leading-[1.2] font-heading text-white uppercase tracking-tight">
+                      {slide.title}
+                    </h1>
+
+                    {slide.subtitle && (
+                      <p class="text-sm md:text-lg text-white/90 mb-6 md:mb-8 leading-relaxed font-medium max-w-md">
+                        {slide.subtitle}
+                      </p>
+                    )}
+
+                    <a
+                      href="/about"
+                      class="text-[9px] md:text-[10px] font-bold uppercase tracking-[0.3em] border-b-2 border-white/40 pb-1 hover:text-white hover:border-white transition-all font-heading inline-block"
+                    >
+                      Learn More
+                    </a>
+                  </div>
+                ))
+              }
             </div>
           </div>
         </div>
 
         <!-- Navigation Arrows: Fills the row height -->
-        <div class="absolute top-0 right-0 lg:right-4 hidden md:flex shadow-2xl bg-primary z-30 h-full">
-          <button id="prev-slide" class="bg-primary hover:bg-secondary text-white w-10 h-10 md:w-12 md:h-12 lg:w-16 lg:h-full flex items-center justify-center transition-all duration-300 border-r border-white/10 group cursor-pointer">
-            <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        <div
+          class="absolute top-0 right-0 lg:right-4 hidden md:flex shadow-2xl bg-primary z-30 h-full rounded-full overflow-hidden"
+        >
+          <button
+            id="prev-slide"
+            class="bg-primary hover:bg-secondary text-white w-10 h-10 md:w-12 md:h-12 lg:w-16 lg:h-full flex items-center justify-center transition-all duration-300 border-r border-white/10 group cursor-pointer rounded-l-full"
+          >
+            <svg
+              class="w-5 h-5 group-hover:-translate-x-1 transition-transform"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 19l-7-7 7-7"></path></svg
+            >
           </button>
-          <button id="next-slide" class="bg-primary hover:bg-secondary text-white w-10 h-10 md:w-12 md:h-12 lg:w-16 lg:h-full flex items-center justify-center transition-all duration-300 group cursor-pointer">
-            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          <button
+            id="next-slide"
+            class="bg-primary hover:bg-secondary text-white w-10 h-10 md:w-12 md:h-12 lg:w-16 lg:h-full flex items-center justify-center transition-all duration-300 group cursor-pointer rounded-r-full"
+          >
+            <svg
+              class="w-5 h-5 group-hover:translate-x-1 transition-transform"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"></path></svg
+            >
           </button>
         </div>
       </div>
     </div>
   </div>
-  
 </section>
 
 <style>
   .slide.opacity-100 .bg-zoom img {
     animation: zoomEffect 15s linear infinite alternate;
   }
-  
+
   @keyframes zoomEffect {
-    from { transform: scale(1); }
-    to { transform: scale(1.1); }
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.1);
+    }
   }
 
   .animate-content {
@@ -101,20 +153,20 @@ const { slides } = Astro.props;
 
 <script>
   let currentSlide = 0;
-  const slides = document.querySelectorAll('.slide');
-  const slideTexts = document.querySelectorAll('.slide-text');
-  const contentBox = document.getElementById('hero-content-box');
+  const slides = document.querySelectorAll(".slide");
+  const slideTexts = document.querySelectorAll(".slide-text");
+  const contentBox = document.getElementById("hero-content-box");
   const totalSlides = slides.length;
 
-  function showSlide(index) {
+  function showSlide(index: number) {
     // Update Images
     slides.forEach((slide, i) => {
       if (i === index) {
-        slide.classList.remove('opacity-0', 'z-0');
-        slide.classList.add('opacity-100', 'z-10');
+        slide.classList.remove("opacity-0", "z-0");
+        slide.classList.add("opacity-100", "z-10");
       } else {
-        slide.classList.remove('opacity-100', 'z-10');
-        slide.classList.add('opacity-0', 'z-0');
+        slide.classList.remove("opacity-100", "z-10");
+        slide.classList.add("opacity-0", "z-0");
       }
     });
 
@@ -122,28 +174,28 @@ const { slides } = Astro.props;
     slideTexts.forEach((text, i) => {
       const el = text as HTMLElement;
       if (i === index) {
-        el.classList.remove('hidden');
-        el.classList.add('block');
+        el.classList.remove("hidden");
+        el.classList.add("block");
       } else {
-        el.classList.add('hidden');
-        el.classList.remove('block');
+        el.classList.add("hidden");
+        el.classList.remove("block");
       }
     });
 
     // Re-trigger animation on the box
     if (contentBox) {
-        contentBox.classList.remove('animate-content');
-        void contentBox.offsetWidth; // force reflow
-        contentBox.classList.add('animate-content');
+      contentBox.classList.remove("animate-content");
+      void contentBox.offsetWidth; // force reflow
+      contentBox.classList.add("animate-content");
     }
   }
 
-  document.getElementById('next-slide')?.addEventListener('click', () => {
+  document.getElementById("next-slide")?.addEventListener("click", () => {
     currentSlide = (currentSlide + 1) % totalSlides;
     showSlide(currentSlide);
   });
 
-  document.getElementById('prev-slide')?.addEventListener('click', () => {
+  document.getElementById("prev-slide")?.addEventListener("click", () => {
     currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
     showSlide(currentSlide);
   });
@@ -155,8 +207,8 @@ const { slides } = Astro.props;
   }, 7000);
 
   // Pause on hover
-  contentBox?.addEventListener('mouseenter', () => clearInterval(autoPlay));
-  contentBox?.addEventListener('mouseleave', () => {
+  contentBox?.addEventListener("mouseenter", () => clearInterval(autoPlay));
+  contentBox?.addEventListener("mouseleave", () => {
     autoPlay = setInterval(() => {
       currentSlide = (currentSlide + 1) % totalSlides;
       showSlide(currentSlide);
